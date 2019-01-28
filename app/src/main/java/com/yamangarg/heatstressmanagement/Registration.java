@@ -32,7 +32,7 @@ public class Registration extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-        Log.d("abcde","Message1");
+        Log.d("abcde", "Message1");
 
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
@@ -44,17 +44,18 @@ public class Registration extends AppCompatActivity {
         ageTextView = findViewById(R.id.ageTextView);
 
 
-        Log.d("abcde","Message2");
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        Log.d("abcde", "Message2");
+    }
+    public void register(View view) {
 
                 Log.d("abcde","Message3"+ R.id.belowTwenty);
                 Log.d("abcde","Message3"+age.getCheckedRadioButtonId());
+
                 if(checkDataEntered()) {
                     Log.d("abcde","Message4");
-
-                    ((MyApplication) Registration.this.getApplication()).user = new User(firstName.getText().toString(),lastName.getText().toString(),getGender(),getAgeR(),email.getText().toString());
+                    MyApplication.user
+                            .setValues(firstName.getText().toString(),lastName.getText().toString(),getGender(),getAgeR(),email.getText().toString());
+                    Log.d("abcde",MyApplication.user.toString());
                     Intent i =new Intent(Registration.this, Location.class);
                     startActivity(i);
                     Log.d("abcde", "Message5");
@@ -63,24 +64,41 @@ public class Registration extends AppCompatActivity {
 
                 }
 
-            }
-        });
+
     }
+
 
     String getGender() {
         switch (gender.getCheckedRadioButtonId()) {
-            case 0:
+            case R.id.male:
                 return "Male";
-            case 1:
+            case R.id.female:
                 return "Female";
-            case 2:
+            case R.id.other:
                 return "Other";
+            default:
+                return "";
         }
-        return "";
+
     }
     String getAgeR(){
         String[] AgeR ={"below 20", "21 to 30","31 to 40","41 to 50","51 to 60","above 60"};
-        return AgeR[age.getCheckedRadioButtonId()-R.id.belowTwenty];
+        switch (age.getCheckedRadioButtonId()){
+            case R.id.belowTwenty:
+                return AgeR[0];
+            case R.id.twentyToThirty:
+                return AgeR[1];
+            case R.id.thirtyToForty:
+                return AgeR[2];
+            case R.id.fortyToFifty:
+                return AgeR[3];
+            case R.id.fiftyToSixty:
+                return AgeR[4];
+            case R.id.aboveSixty:
+                return AgeR[5];
+            default:
+                return "";
+        }
     }
 
     boolean isEmail(EditText text) {
@@ -119,11 +137,11 @@ public class Registration extends AppCompatActivity {
             email.setError("Enter a valid email!");
             flag=false;
         }
-        /*
+
         if(!isEmail(email))  {
         email.setError("Invalid Email");
         }
-        */
+
         return flag;
     }
 }

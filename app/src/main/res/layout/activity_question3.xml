@@ -18,6 +18,7 @@
         android:textSize="18sp" />
 
     <RadioGroup
+        android:id="@+id/Options"
         android:layout_width="242dp"
         android:layout_height="199dp"
         android:layout_alignParentStart="true"
@@ -30,7 +31,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="option1"
             android:text="No activity (taking rest, sleeping in comfortable room)" />
 
         <RadioButton
@@ -38,7 +38,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="option2"
             android:text="Light" />
 
         <RadioButton
@@ -46,7 +45,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="option3"
             android:text="Moderate" />
 
         <RadioButton
@@ -54,7 +52,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="option4"
             android:text="Heavy" />
     </RadioGroup>
 

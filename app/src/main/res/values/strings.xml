@@ -1,33 +1,4 @@
 <resources>
     <string name="app_name">Heat Stress Management</string>
     <string name="title_activity_location">Map</string>
-
-
-    <string-array name="Q001opt">
-        <item>Comfortable</item>
-        <item>Warm</item>
-        <item>Hot</item>
-        <item>Very Hot</item>
-        <item>Sweltering</item>
-
-    </string-array>
-    <string-array name="Q003opt">
-        <item>NoActivity</item>
-        <item>Light</item>
-        <item>Moderate</item>
-        <item>Heavy</item>
-
-    </string-array>
-    <string-array name="Q004opt">
-        <item>DirectSun</item>
-        <item>Shading</item>
-        <item>Indoor</item>
-
-    </string-array>
-    <string-array name="Q005opt">
-        <item>FullCovered</item>
-        <item>Normal</item>
-        <item>Minimal</item>
-
-    </string-array>
 </resources>

@@ -23,7 +23,7 @@ public class Location extends AppCompatActivity {
 
     public void startSurvey(View view) {
 
-        startActivity(new Intent(Location.this, Question1.class));
+        startActivity(new Intent(this, Question1.class));
 
 
     }

@@ -4,5 +4,5 @@ import android.app.Application;
 
 public class MyApplication extends Application {
 
-        public User user;
+        public static User user= new User();
 }

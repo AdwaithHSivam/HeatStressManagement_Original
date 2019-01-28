@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class User implements Serializable {
-    String  FirstName,
+     String  FirstName,
             LastName,
             Gender,
             Age,
@@ -28,8 +28,16 @@ public class User implements Serializable {
         Email = email;
         Responses= new HashMap<String,String>();
     }
+    public void setValues(String firstName, String lastName, String gender, String age, String email){
+        FirstName = firstName;
+        LastName = lastName;
+        Gender = gender;
+        Age = age;
+        Email = email;
+    }
     public void AddResponse(String Q,String A){
         Responses.put(Q, A);
 
     }
+
 }
