@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1075865852598",
+    "firebase_url": "https://heatstressmanagement-79927.firebaseio.com",
+    "project_id": "heatstressmanagement-79927",
+    "storage_bucket": "heatstressmanagement-79927.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1075865852598:android:2da9c917bcc70d1e",
+        "android_client_info": {
+          "package_name": "com.yamangarg.heatstressmanagement"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1075865852598-kkkh82f90bclc8fqb686i4ofi5i1l2gs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yamangarg.heatstressmanagement",
+            "certificate_hash": "99f04ddeac51330fc8288cde755637d89d705721"
+          }
+        },
+        {
+          "client_id": "1075865852598-u9mg4i3fjcq1mtctnldl8t055tvd664t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYG10gsPtgL_UJgutic2RxjMxOPNRTOjU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1075865852598-u9mg4i3fjcq1mtctnldl8t055tvd664t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

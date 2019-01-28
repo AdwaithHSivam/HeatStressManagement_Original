@@ -13,8 +13,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class Registration extends AppCompatActivity {
 
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     EditText firstName;
     EditText lastName;
     RadioGroup gender;
@@ -77,9 +80,9 @@ public class Registration extends AppCompatActivity {
             ageTextView.setError("Select age!");
         }
 
-        if (isEmpty(email) == false) {
+        if (!isEmpty(email)) {
             email.setError("Enter a valid email!");
         }
-        if ()
+
     }
 }
