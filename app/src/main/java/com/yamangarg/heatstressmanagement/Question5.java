@@ -27,8 +27,9 @@ public class Question5 extends AppCompatActivity {
         Intent intent=new Intent(getApplicationContext(),Question4.class);
         startActivity(intent);
     }
-    public void submit(View view){
-
+    public void next(View view){
+        Intent intent=new Intent(getApplicationContext(),Submit.class);
+        startActivity(intent);
     }
 
     @Override

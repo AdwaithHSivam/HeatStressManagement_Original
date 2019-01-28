@@ -25,6 +25,7 @@ public class Location extends AppCompatActivity {
 
         startActivity(new Intent(Location.this, Question1.class));
 
+
     }
 
     LocationManager locationManager;
