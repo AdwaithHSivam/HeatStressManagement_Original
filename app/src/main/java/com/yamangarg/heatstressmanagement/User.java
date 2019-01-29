@@ -1,17 +1,19 @@
 package com.yamangarg.heatstressmanagement;
 
+import android.support.annotation.Keep;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-
-public class User implements Serializable {
-     String  FirstName,
+@Keep
+public class User {
+     public String  FirstName,
             LastName,
             Gender,
             Age,
             Email;
-    Map<String,String> Responses;
-    android.location.Location location;
+    public Map<String,String> Responses;
+    public android.location.Location location;
     public User (){
         FirstName="";
         LastName="";
