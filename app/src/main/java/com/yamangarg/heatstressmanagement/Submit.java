@@ -35,7 +35,6 @@ public class Submit extends AppCompatActivity {
     }
     public void submit(View view){
 
-        android.location.Location location;
         Log.d("abcde",user.toString());
         if(flag) {
             db.collection("users")
