@@ -24,9 +24,7 @@ public class Question2 extends AppCompatActivity {
     }
 
     public  void previous(View view){
-        user.AddResponse(Qid,editText.getText().toString());
-        Intent intent=new Intent(getApplicationContext(),Question1.class);
-        startActivity(intent);
+        onBackPressed();
     }
 
     @Override

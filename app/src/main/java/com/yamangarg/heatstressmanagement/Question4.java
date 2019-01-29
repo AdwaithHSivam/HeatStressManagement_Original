@@ -14,14 +14,13 @@ public class Question4 extends AppCompatActivity {
     String Options[]={"DirectSun","Shading","Indoors"};
 
     public void next(View view){
+        if(options.getCheckedRadioButtonId()!=-1)
         user.AddResponse(Qid,Options[options.getCheckedRadioButtonId()- R.id.radioButton1]);
         Intent intent=new Intent(getApplicationContext(),Question5.class);
         startActivity(intent);
     }
     public void previous(View view){
-        user.AddResponse(Qid,Options[options.getCheckedRadioButtonId()- R.id.radioButton1]);
-        Intent intent=new Intent(getApplicationContext(),Question3.class);
-        startActivity(intent);
+        onBackPressed();
     }
 
     @Override

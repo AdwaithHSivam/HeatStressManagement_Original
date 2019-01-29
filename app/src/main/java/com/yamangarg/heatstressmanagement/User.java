@@ -11,6 +11,7 @@ public class User implements Serializable {
             Age,
             Email;
     Map<String,String> Responses;
+    android.location.Location location;
     public User (){
         FirstName="";
         LastName="";
@@ -18,6 +19,7 @@ public class User implements Serializable {
         Age="";
         Email="";
         Responses= new HashMap<String,String>();
+
     }
 
     public User(String firstName, String lastName, String gender, String age, String email) {

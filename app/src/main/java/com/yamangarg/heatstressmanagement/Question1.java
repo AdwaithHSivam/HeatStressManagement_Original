@@ -24,15 +24,14 @@ public class Question1 extends AppCompatActivity {
 
 
     public void next(View view){
+        if(options.getCheckedRadioButtonId()!=-1)
         user.AddResponse(Qid,Options[options.getCheckedRadioButtonId()- R.id.radioButton1]);
         Log.d("abcde",user.toString());
         Intent intent=new Intent(getApplicationContext(),Question2.class);
         startActivity(intent);
     }
     public void previous(View view){
-        user.AddResponse(Qid,Options[options.getCheckedRadioButtonId()- R.id.radioButton1]);
-        Intent intent=new Intent(getApplicationContext(),Location.class);
-        startActivity(intent);
+        onBackPressed();
     }
 
 

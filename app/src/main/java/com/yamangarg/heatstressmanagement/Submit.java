@@ -31,11 +31,11 @@ public class Submit extends AppCompatActivity {
         Log.d("abcde",user.toString());
     }
     public void previous(View view){
-        Intent intent=new Intent(getApplicationContext(),Question5.class);
-        startActivity(intent);
+        onBackPressed();
     }
     public void submit(View view){
 
+        android.location.Location location;
         Log.d("abcde",user.toString());
         if(flag) {
             db.collection("users")

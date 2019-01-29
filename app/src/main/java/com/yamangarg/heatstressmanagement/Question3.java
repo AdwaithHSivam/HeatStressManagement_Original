@@ -15,14 +15,13 @@ public class Question3 extends AppCompatActivity {
     String Options[]={"NoActivity","Light","Moderate","Heavy"};
 
     public void next(View view){
+        if(options.getCheckedRadioButtonId()!=-1)
         user.AddResponse(Qid,Options[options.getCheckedRadioButtonId()- R.id.radioButton1]);
         Intent intent=new Intent(getApplicationContext(),Question4.class);
         startActivity(intent);
     }
     public void previous(View view){
-        user.AddResponse(Qid,Options[options.getCheckedRadioButtonId()- R.id.radioButton1]);
-        Intent intent=new Intent(getApplicationContext(),Question2.class);
-        startActivity(intent);
+        onBackPressed();
     }
 
     @Override
