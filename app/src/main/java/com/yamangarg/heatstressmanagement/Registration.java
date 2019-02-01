@@ -1,7 +1,7 @@
 package com.yamangarg.heatstressmanagement;
 
-import android.app.Application;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,14 +10,22 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+
 
 public class Registration extends AppCompatActivity {
 
+
+    FirebaseAuth mAuth;
 
     EditText firstName;
     EditText lastName;
@@ -27,6 +35,7 @@ public class Registration extends AppCompatActivity {
     Button register;
     TextView genderTextView;
     TextView ageTextView;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +43,7 @@ public class Registration extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
         Log.d("abcde", "Message1");
 
+        mAuth=FirebaseAuth.getInstance();
         firstName = findViewById(R.id.firstName);
         lastName = findViewById(R.id.lastName);
         gender = findViewById(R.id.gender);
@@ -42,7 +52,7 @@ public class Registration extends AppCompatActivity {
         register = findViewById(R.id.register);
         genderTextView = findViewById(R.id.genderTextView);
         ageTextView = findViewById(R.id.ageTextView);
-
+        progressBar = findViewById(R.id.progressBar);
 
         Log.d("abcde", "Message2");
     }
@@ -53,13 +63,27 @@ public class Registration extends AppCompatActivity {
 
                 if(checkDataEntered()) {
                     Log.d("abcde","Message4");
+                    progressBar.setVisibility(View.VISIBLE);
+                    String Email =email.getText().toString();
                     MyApplication.user
-                            .setValues(firstName.getText().toString(),lastName.getText().toString(),getGender(),getAgeR(),email.getText().toString());
+                            .setValues(firstName.getText().toString(),lastName.getText().toString(),getGender(),getAgeR(),Email);
+                    mAuth.createUserWithEmailAndPassword(Email,"password").addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            progressBar.setVisibility(View.GONE);
+                            if(task.isSuccessful()){
+                                Toast.makeText(getApplicationContext(),"User Registration Successfull",Toast.LENGTH_SHORT).show();
+                            }
+                            else if(task.getException() instanceof FirebaseAuthUserCollisionException){
+                                Toast.makeText(getApplicationContext(),"You are already registered",Toast.LENGTH_SHORT);
+                            }
+                            else{
+                                Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                     Log.d("abcde",MyApplication.user.toString());
-                    Intent i =new Intent(Registration.this, Location.class);
-                    startActivity(i);
-                    Log.d("abcde", "Message5");
-                    Registration.this.finish();
+                    onBackPressed();
                     Log.d("abcde", "Message5");
 
                 }

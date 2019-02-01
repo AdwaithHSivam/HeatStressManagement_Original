@@ -19,17 +19,20 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class Location extends AppCompatActivity {
+
+    FirebaseAuth mAuth;
 
     public void startSurvey(View view) {
 
         startActivity(new Intent(this, Question1.class));
 
-
     }
 
     LocationManager locationManager;
-
     LocationListener locationListener;
 
     @Override
@@ -76,7 +79,7 @@ public class Location extends AppCompatActivity {
                         .setPositiveButton("RETRY", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 //ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, Integer.parseInt(WRITE_EXTERNAL_STORAGE));
-                                Intent i = new Intent(Location.this,Location.class);
+                                Intent i = new Intent(Location.this, Location.class);
                                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(i);
                             }
@@ -99,8 +102,9 @@ public class Location extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
 
-        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        mAuth =FirebaseAuth.getInstance();
 
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
 
             @Override
@@ -129,31 +133,38 @@ public class Location extends AppCompatActivity {
         };
 
         // If device is running SDK < 23
-
-        if (Build.VERSION.SDK_INT < 23) {
-
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-
-        } else {
-
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-                // ask for permission
-
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-
-
-            } else {
-
-                // we have permission!
+        {
+            if (Build.VERSION.SDK_INT < 23) {
 
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
-            }
+            } else {
 
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                    // ask for permission
+
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+
+
+                } else {
+
+                    // we have permission!
+
+                    locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+
+                }
+
+            }
         }
 
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
 
     }
 }
