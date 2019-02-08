@@ -80,6 +80,8 @@ public class Registration extends AppCompatActivity {
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if(task.isSuccessful()){
                                                     Toast.makeText(getApplicationContext(),"User Registration Successful",Toast.LENGTH_SHORT).show();
+                                                    onBackPressed();
+
                                                 }
                                                 else {
                                                     Toast.makeText(getApplicationContext(),"User Registration Unsuccessful",Toast.LENGTH_SHORT).show();
@@ -98,7 +100,6 @@ public class Registration extends AppCompatActivity {
                         }
                     });
                     Log.d("abcde",MyApplication.user.toString());
-                    onBackPressed();
                     Log.d("abcde", "Message5");
 
                 }

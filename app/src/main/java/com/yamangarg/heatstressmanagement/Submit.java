@@ -43,6 +43,9 @@ public class Submit extends AppCompatActivity {
                             Log.d("abcde", "DocumentSnapshot added with ID: " + documentReference.getId());
                             flag=false;
                             Toast.makeText(Submit.this, "Data Successfully Uploaded",Toast.LENGTH_LONG).show();
+                            Intent i =new Intent(Submit.this, Location.class);
+                            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(i);
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
