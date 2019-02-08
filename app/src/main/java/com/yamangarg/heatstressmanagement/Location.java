@@ -34,7 +34,6 @@ public class Location extends AppCompatActivity {
 
     LocationManager locationManager;
     LocationListener locationListener;
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -165,6 +164,10 @@ public class Location extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser==null){
+            startActivity(new Intent(this, Registration.class));
+        }
+
 
     }
 }
