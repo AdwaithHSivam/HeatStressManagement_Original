@@ -60,9 +60,6 @@ public class Registration extends AppCompatActivity {
     }
     public void register(View view) {
 
-                Log.d("abcde","Message3"+ R.id.belowTwenty);
-                Log.d("abcde","Message3"+age.getCheckedRadioButtonId());
-
                 if(checkDataEntered()) {
                     Log.d("abcde","Message4");
                     progressBar.setVisibility(View.VISIBLE);
@@ -99,8 +96,6 @@ public class Registration extends AppCompatActivity {
                             }
                         }
                     });
-                    Log.d("abcde",MyApplication.user.toString());
-                    Log.d("abcde", "Message5");
 
                 }
 

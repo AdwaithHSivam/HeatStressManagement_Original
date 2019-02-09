@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -18,15 +19,16 @@ public class Submit extends AppCompatActivity {
 
     User user;
     boolean flag;
+    ProgressBar progressBar;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit);
+        progressBar=findViewById(R.id.progressBar2);
         user = MyApplication.user;
         flag=true;
-        Log.d("abcde",user.toString());
     }
     public void previous(View view){
         onBackPressed();
@@ -35,6 +37,7 @@ public class Submit extends AppCompatActivity {
 
         Log.d("abcde",user.toString());
         if(flag) {
+            progressBar.setVisibility(View.VISIBLE);
             db.collection("users")
                     .add(user)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -56,7 +59,7 @@ public class Submit extends AppCompatActivity {
 
                         }
                     });
-
+            progressBar.setVisibility(View.GONE);
         }
 
 
