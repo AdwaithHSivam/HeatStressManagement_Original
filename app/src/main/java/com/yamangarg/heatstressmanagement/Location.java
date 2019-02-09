@@ -18,13 +18,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class Location extends AppCompatActivity {
 
     FirebaseAuth mAuth;
+    int flag;
 
     public void startSurvey(View view) {
 
@@ -34,6 +39,7 @@ public class Location extends AppCompatActivity {
 
     LocationManager locationManager;
     LocationListener locationListener;
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -52,7 +58,7 @@ public class Location extends AppCompatActivity {
             alertDialogBuilder.setTitle("Change Permissions in Settings");
             alertDialogBuilder
                     .setMessage("" +
-                            "\nClick SETTINGS to Manually Set\n"+"Permissions to use Database Storage")
+                            "\nClick SETTINGS to Manually Set\n" + "Permissions to use Database Storage")
                     .setCancelable(false)
                     .setPositiveButton("SETTINGS", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -73,7 +79,7 @@ public class Location extends AppCompatActivity {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
                 alertDialogBuilder.setTitle("Second Chance");
                 alertDialogBuilder
-                        .setMessage("Click RETRY to Set Permissions to Allow\n\n"+"Click EXIT to the Close App")
+                        .setMessage("Click RETRY to Set Permissions to Allow\n\n" + "Click EXIT to the Close App")
                         .setCancelable(false)
                         .setPositiveButton("RETRY", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -97,11 +103,28 @@ public class Location extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        flag++;
+        if (flag > 1) {
+            super.onBackPressed();
+        } else {
+            Toast.makeText(this, "Press Back Again to Exit", Toast.LENGTH_SHORT).show();
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    flag=0;
+                }
+            },2000);
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
 
-        mAuth =FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        flag = 0;
 
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
@@ -110,7 +133,7 @@ public class Location extends AppCompatActivity {
             public void onLocationChanged(android.location.Location location) {
 
                 Log.i("Location", location.toString());
-                MyApplication.user.location =location;
+                MyApplication.user.location = location;
 
             }
 
@@ -135,6 +158,16 @@ public class Location extends AppCompatActivity {
         {
             if (Build.VERSION.SDK_INT < 23) {
 
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
             } else {
