@@ -9,8 +9,11 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -40,34 +43,27 @@ public class Submit extends AppCompatActivity {
 
         if(flag) {
             progressBar.setVisibility(View.VISIBLE);
-            Log.d("abcde", "Progressbar Visibility1: " + progressBar.getVisibility());
-            db.collection("users")
-                    .add(user)
-                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            db.collection("responses")
+                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .set(user.responseObject)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            Log.d("abcde", "DocumentSnapshot added with ID: " + documentReference.getId());
-                            flag=false;
-                            progressBar.setVisibility(View.GONE);
-                            Log.d("abcde", "Progressbar Visibility2: " + progressBar.getVisibility());
-                            Toast.makeText(Submit.this, "Data Successfully Uploaded",Toast.LENGTH_LONG).show();
-                            Intent i =new Intent(Submit.this, Location.class);
-                            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(i);
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.w("abcde", "Error adding document", e);
-                            progressBar.setVisibility(View.GONE);
-                            Toast.makeText(Submit.this, "Try Again",Toast.LENGTH_LONG).show();
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                Toast.makeText(getApplicationContext(),"Response Submission Successful",Toast.LENGTH_SHORT).show();
+                                Intent i =new Intent(Submit.this, Location.class);
+                                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(i);
 
+                            }
+                            else {
+                                Toast.makeText(getApplicationContext(),"Response Submission Unsuccessful",Toast.LENGTH_SHORT).show();
+
+                            }
                         }
                     });
-            progressBar.setVisibility(View.GONE);
-            Log.d("abcde", "Progressbar Visibility3: " + progressBar.getVisibility());
 
+            progressBar.setVisibility(View.GONE);
         }
 
 

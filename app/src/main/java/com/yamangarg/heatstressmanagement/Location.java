@@ -160,7 +160,7 @@ public class Location extends AppCompatActivity {
             public void onLocationChanged(android.location.Location location) {
 
                 Log.i("Location", location.toString());
-                MyApplication.user.location = location;
+                MyApplication.user.responseObject.location = location;
 
             }
 

@@ -61,41 +61,24 @@ public class Registration extends AppCompatActivity {
     public void register(View view) {
 
                 if(checkDataEntered()) {
-                    Log.d("abcde","Message4");
-                    progressBar.setVisibility(View.VISIBLE);
-                    String Email =email.getText().toString();
                     MyApplication.user
-                            .setValues(firstName.getText().toString(),lastName.getText().toString(),getGender(),getAgeR(),Email);
-                    mAuth.createUserWithEmailAndPassword(Email,"password").addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            progressBar.setVisibility(View.GONE);
-                            if(task.isSuccessful()){
-                                FirebaseFirestore.getInstance().collection("userdata").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(MyApplication.user)
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if(task.isSuccessful()){
-                                                    Toast.makeText(getApplicationContext(),"User Registration Successful",Toast.LENGTH_SHORT).show();
-                                                    onBackPressed();
+                            .setValues(firstName.getText().toString(),lastName.getText().toString(),getGender(),getAgeR(),email.getText().toString());
 
-                                                }
-                                                else {
-                                                    Toast.makeText(getApplicationContext(),"User Registration Unsuccessful",Toast.LENGTH_SHORT).show();
+                    FirebaseFirestore.getInstance().collection("userdata").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(MyApplication.user.userData)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()){
+                                        Toast.makeText(getApplicationContext(),"User Registration Successful",Toast.LENGTH_SHORT).show();
+                                        onBackPressed();
+                                    }
+                                    else {
+                                        Toast.makeText(getApplicationContext(),"User Registration Unsuccessful",Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
 
-                                                }
-                                            }
-                                        });
 
-                            }
-                            else if(task.getException() instanceof FirebaseAuthUserCollisionException){
-                                Toast.makeText(getApplicationContext(),"You are already registered",Toast.LENGTH_SHORT).show();
-                            }
-                            else{
-                                Toast.makeText(getApplicationContext(),task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
 
                 }
 
