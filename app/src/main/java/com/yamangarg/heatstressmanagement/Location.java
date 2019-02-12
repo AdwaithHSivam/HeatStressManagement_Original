@@ -228,6 +228,9 @@ public class Location extends AppCompatActivity {
         if(currentUser==null){
             startActivity(new Intent(this, Login.class));
         }
+        else if(!MyApplication.user.isOk){
+            startActivity(new Intent(this, Registration.class));
+        }
         else{
             signOut.setVisibility(View.VISIBLE);
             editInfo.setVisibility(View.VISIBLE);

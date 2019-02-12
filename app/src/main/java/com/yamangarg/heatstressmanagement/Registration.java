@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
@@ -56,19 +57,32 @@ public class Registration extends AppCompatActivity {
         ageTextView = findViewById(R.id.ageTextView);
         progressBar = findViewById(R.id.progressBar);
 
+        email.setText(mAuth.getCurrentUser().getEmail());
+        email.setEnabled(false);
         Log.d("abcde", "Message2");
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(mAuth.getCurrentUser()==null){
+            startActivity(new Intent(this, Login.class));
+        }
+    }
+
     public void register(View view) {
 
                 if(checkDataEntered()) {
+                    MyApplication.user.userData.Uid=mAuth.getCurrentUser().getUid();
                     MyApplication.user
-                            .setValues(firstName.getText().toString(),lastName.getText().toString(),getGender(),getAgeR(),email.getText().toString());
+                            .setValues(firstName.getText().toString(),lastName.getText().toString(),getGender(),getAgeR(),mAuth.getCurrentUser().getEmail());
 
                     FirebaseFirestore.getInstance().collection("userdata").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(MyApplication.user.userData)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
+                                        MyApplication.user.setOk(true);
                                         Toast.makeText(getApplicationContext(),"User Registration Successful",Toast.LENGTH_SHORT).show();
                                         onBackPressed();
                                     }
@@ -119,10 +133,7 @@ public class Registration extends AppCompatActivity {
         }
     }
 
-    boolean isEmail(EditText text) {
-        CharSequence email = text.getText().toString();
-        return (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
-    }
+
 
     boolean isEmpty(EditText text) {
         CharSequence str = text.getText().toString();
@@ -151,14 +162,6 @@ public class Registration extends AppCompatActivity {
             flag=false;
         }
 
-        if (isEmpty(email)) {
-            email.setError("Enter a valid email!");
-            flag=false;
-        }
-
-        if(!isEmail(email))  {
-        email.setError("Invalid Email");
-        }
 
         return flag;
     }

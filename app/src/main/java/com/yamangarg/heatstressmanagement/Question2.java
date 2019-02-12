@@ -18,6 +18,10 @@ public class Question2 extends AppCompatActivity {
     String Qid ="Question2";
     User user;
 
+    public String toStringTime(int h,int m){
+        return (h<10?"0":"")+h +":"+(m<10?"0":"")+m;
+    }
+
     public void timePicker(View view){
         Calendar mcurrentTime = Calendar.getInstance();
         int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
@@ -25,7 +29,8 @@ public class Question2 extends AppCompatActivity {
         mTimePicker = new TimePickerDialog(Question2.this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                editTime.setText(hourOfDay +":"+ minute);
+
+                editTime.setText(toStringTime(hourOfDay, minute));
             }
         },hour,0,true);
         mTimePicker.setTitle("Select Time");
