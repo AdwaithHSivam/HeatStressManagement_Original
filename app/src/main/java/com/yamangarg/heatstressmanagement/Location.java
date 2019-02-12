@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -36,11 +37,29 @@ public class Location extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     int flag;
+    Button signOut;
+    Button editInfo;
+
+    public void editInfo(View view){
+        startActivity(new Intent(this, Registration.class));
+    }
 
     public void startSurvey(View view) {
 
-        startActivity(new Intent(this, Question1.class));
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser==null){
+            startActivity(new Intent(this, Login.class));
+        }
+        else {
+            startActivity(new Intent(this, Question1.class));
+        }
+    }
 
+    public void signOut(View view){
+
+        mAuth.signOut();
+        signOut.setVisibility(View.INVISIBLE);
+        editInfo.setVisibility(View.INVISIBLE);
     }
 
     LocationManager locationManager;
@@ -131,6 +150,8 @@ public class Location extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         flag = 0;
+        signOut = findViewById(R.id.signOut);
+        editInfo= findViewById(R.id.editInfo);
 
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
@@ -206,6 +227,10 @@ public class Location extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser==null){
             startActivity(new Intent(this, Login.class));
+        }
+        else{
+            signOut.setVisibility(View.VISIBLE);
+            editInfo.setVisibility(View.VISIBLE);
         }
 
 
