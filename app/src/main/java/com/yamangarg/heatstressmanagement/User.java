@@ -7,14 +7,16 @@ import java.util.HashMap;
 import java.util.Map;
 @Keep
 public class User {
-     public String  FirstName,
-            LastName,
-            Gender,
-            Age,
-            Email;
+     public String  Uid,
+             FirstName,
+             LastName,
+             Gender,
+             Age,
+             Email;
     public Map<String,String> Responses;
     public android.location.Location location;
     public User (){
+        Uid ="";
         FirstName="";
         LastName="";
         Gender="";

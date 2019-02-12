@@ -21,14 +21,13 @@ public class Question2 extends AppCompatActivity {
     public void timePicker(View view){
         Calendar mcurrentTime = Calendar.getInstance();
         int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
-        int min  = mcurrentTime.get(Calendar.MINUTE);
         TimePickerDialog mTimePicker;
         mTimePicker = new TimePickerDialog(Question2.this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                 editTime.setText(hourOfDay +":"+ minute);
             }
-        },hour,min,true);
+        },hour,0,true);
         mTimePicker.setTitle("Select Time");
         mTimePicker.show();
 
