@@ -7,40 +7,33 @@ import java.util.HashMap;
 import java.util.Map;
 @Keep
 public class User {
-     public String  FirstName,
-            LastName,
-            Gender,
-            Age,
-            Email;
-    public Map<String,String> Responses;
-    public android.location.Location location;
+
+    public UserData userData;
+    public ResponseClass responseObject;
+    public boolean isOk;
     public User (){
-        FirstName="";
-        LastName="";
-        Gender="";
-        Age="";
-        Email="";
-        Responses= new HashMap<String,String>();
+        userData= new UserData();
+        responseObject= new ResponseClass();
 
     }
 
-    public User(String firstName, String lastName, String gender, String age, String email) {
+    /* User(String firstName, String lastName, String gender, String age, String email) {
         FirstName = firstName;
         LastName = lastName;
         Gender = gender;
         Age = age;
         Email = email;
         Responses= new HashMap<String,String>();
+    }*/
+    public void setOk(boolean flag){
+        isOk=flag;
     }
     public void setValues(String firstName, String lastName, String gender, String age, String email){
-        FirstName = firstName;
-        LastName = lastName;
-        Gender = gender;
-        Age = age;
-        Email = email;
+        userData.setValues(firstName, lastName, gender, age, email);
     }
+
     public void AddResponse(String Q,String A){
-        Responses.put(Q, A);
+        responseObject.AddResponse(Q, A);
 
     }
 

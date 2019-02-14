@@ -2,7 +2,6 @@
   <dictionary name="HP">
     <words>
       <w>firebase</w>
-      <w>firestore</w>
     </words>
   </dictionary>
 </component>
