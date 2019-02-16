@@ -44,6 +44,7 @@
         <activity android:name=".Question3" />
         <activity android:name=".Question4" />
         <activity android:name=".Question5" />
+        <receiver android:name=".AlarmReceiver"/>
     </application>
 
 </manifest>

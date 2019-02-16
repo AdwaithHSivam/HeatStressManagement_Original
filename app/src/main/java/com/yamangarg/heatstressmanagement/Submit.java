@@ -18,6 +18,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 public class Submit extends AppCompatActivity {
 
     User user;
@@ -44,7 +47,7 @@ public class Submit extends AppCompatActivity {
         if(flag) {
             progressBar.setVisibility(View.VISIBLE);
             db.collection("responses")
-                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid()+" -" +DateFormat.getDateTimeInstance().format(new Date()))
                     .set(user.responseObject)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

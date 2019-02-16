@@ -14,6 +14,7 @@ public class User {
     public User (){
         userData= new UserData();
         responseObject= new ResponseClass();
+        isOk=false;
 
     }
 

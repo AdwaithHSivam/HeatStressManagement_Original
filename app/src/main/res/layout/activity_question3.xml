@@ -76,4 +76,15 @@
         android:onClick="previous"
         android:text="Previous" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button1"
+        android:layout_below="@+id/Options"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="Types Of Activities"
+        app:srcCompat="@drawable/types" />
+
 </RelativeLayout>
