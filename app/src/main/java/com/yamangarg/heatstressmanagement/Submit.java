@@ -33,6 +33,7 @@ public class Submit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit);
         progressBar=findViewById(R.id.progressBar2);
+        progressBar.setVisibility(View.GONE);
         user = MyApplication.user;
         flag=true;
     }
@@ -61,12 +62,12 @@ public class Submit extends AppCompatActivity {
                             }
                             else {
                                 Toast.makeText(getApplicationContext(),"Response Submission Unsuccessful",Toast.LENGTH_SHORT).show();
-
+                                progressBar.setVisibility(View.GONE);
                             }
                         }
                     });
 
-            progressBar.setVisibility(View.GONE);
+
         }
 
 

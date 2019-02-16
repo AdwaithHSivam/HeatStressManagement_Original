@@ -15,7 +15,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="88dp"
         android:layout_marginTop="34dp"
-        android:text="Clothing"
+        android:text="Clothing  आपने किस प्रकार के वस्त्र पहने थे?"
         style="@style/WhiteText"
         android:textSize="24sp" />
 

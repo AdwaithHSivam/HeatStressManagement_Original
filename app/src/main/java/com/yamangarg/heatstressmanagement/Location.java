@@ -103,13 +103,16 @@ public class Location extends AppCompatActivity {
 
     public void setAlarm(){
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 14);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 22);
+        Log.d("abcde", "setAlarm Begins");
         Intent intent1 = new Intent(Location.this, AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(Location.this, 0,intent1, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager am = (AlarmManager) Location.this.getSystemService(Location.this.ALARM_SERVICE);
-        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        AlarmManager am = (AlarmManager) Location.this.getSystemService(Location.ALARM_SERVICE);
+        Log.d("abcde", "am = "+am.toString());
+        am.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        Log.d("abcde", "setAlarm Ends");
+
     }
 
     @Override

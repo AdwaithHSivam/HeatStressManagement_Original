@@ -11,7 +11,7 @@ import android.support.v4.app.NotificationCompat;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
-    private int MID =0;
+    private int MID =123;
 
     @Override
     public void onReceive(Context context, Intent intent) {

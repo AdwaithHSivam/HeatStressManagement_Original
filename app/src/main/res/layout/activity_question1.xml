@@ -14,7 +14,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="25dp"
-        android:text="How did you feel today? Select the stress level(comfort level) felt during peak hours (i.e. normally between 10:00AM to 4:00PM)."
+        android:text="How did you feel today? Select the stress level(comfort level) felt during peak hours (i.e. normally between 10:00AM to 4:00PM).\nआज आप कैसा महसूस कर रहे थे। गर्मी की तनाव की मात्रा अंकित करें(करीब 10 से 4 बजे के बीच में)।"
         android:textSize="18sp"
         style="@style/WhiteText"/>
 
@@ -25,42 +25,42 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="108dp">
+        android:layout_marginTop="160dp">
 
         <RadioButton
             android:id="@+id/radioButton1"
             android:layout_width="wrap_content"
             android:layout_height="44dp"
             android:layout_weight="1"
-            android:text="Comfortable" />
+            android:text="Comfortable  अनुकूल" />
 
         <RadioButton
             android:id="@+id/radioButton2"
             android:layout_width="wrap_content"
             android:layout_height="42dp"
             android:layout_weight="1"
-            android:text="Warm" />
+            android:text="Warm  हल्का गर्म" />
 
         <RadioButton
             android:id="@+id/radioButton3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Hot" />
+            android:text="Hot  गरम" />
 
         <RadioButton
             android:id="@+id/radioButton4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Very Hot" />
+            android:text="Very Hot  बहुत गर्म" />
 
         <RadioButton
             android:id="@+id/radioButton5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Sweltering" />
+            android:text="Sweltering  बेहद गरम" />
     </RadioGroup>
 
     <Button

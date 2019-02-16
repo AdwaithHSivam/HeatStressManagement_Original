@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginTop="31dp"
-        android:text="Approximate time on the clock , when you felt maximum heat stress today"
+        android:text="Approximate time on the clock , when you felt maximum heat stress today\nवह समय जब आपको सबसे ज्यादा गर्मी लगी।"
         style="@style/WhiteText"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
