@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/BackgroundImg1"
     tools:context=".Question5">
 
     <TextView
@@ -15,7 +16,7 @@
         android:layout_marginStart="88dp"
         android:layout_marginTop="34dp"
         android:text="Clothing"
-        android:textColor="@android:color/background_dark"
+        style="@style/WhiteText"
         android:textSize="24sp" />
 
     <RadioGroup

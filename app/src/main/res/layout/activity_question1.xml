@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/BackgroundImg1"
     tools:context=".Question1">
 
     <TextView
@@ -14,8 +15,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="25dp"
         android:text="How did you feel today? Select the stress level(comfort level) felt during peak hours (i.e. normally between 10:00AM to 4:00PM)."
-        android:textColor="@android:color/background_dark"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        style="@style/WhiteText"/>
 
     <RadioGroup
         android:id="@+id/Options"

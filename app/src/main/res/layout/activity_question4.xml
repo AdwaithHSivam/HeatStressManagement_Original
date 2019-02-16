@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/BackgroundImg1"
     tools:context=".Question4">
 
     <TextView
@@ -15,7 +16,7 @@
         android:layout_marginStart="61dp"
         android:layout_marginTop="34dp"
         android:text="Working Condition"
-        android:textColor="@android:color/background_dark"
+        style="@style/WhiteText"
         android:textSize="24sp" />
 
     <RadioGroup

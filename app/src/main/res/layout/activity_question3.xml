@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/BackgroundImg1"
     tools:context=".Question3">
 
     <TextView
@@ -14,7 +15,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="37dp"
         android:text="Which kind of activity were you involved with today ?"
-        android:textColor="@android:color/background_dark"
+        style="@style/WhiteText"
         android:textSize="18sp" />
 
     <RadioGroup
