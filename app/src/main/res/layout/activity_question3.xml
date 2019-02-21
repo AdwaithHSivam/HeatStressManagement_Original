@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/BackgroundImg1"
     tools:context=".Question3">
 
     <TextView
@@ -13,8 +14,8 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="37dp"
-        android:text="Which kind of activity were you involved with today ?"
-        android:textColor="@android:color/background_dark"
+        android:text="Which kind of activity were you involved with today ?\nआप आज किस तरह के कार्य कर रहे थे?"
+        style="@style/WhiteText"
         android:textSize="18sp" />
 
     <RadioGroup
@@ -31,28 +32,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="No activity (taking rest, sleeping in comfortable room)" />
+            android:text="No activity (taking rest, sleeping in comfortable room)  कोई कार्य नही(आराम करना, सोना)" />
 
         <RadioButton
             android:id="@+id/radioButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Light" />
+            android:text="Light  हल्का" />
 
         <RadioButton
             android:id="@+id/radioButton3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Moderate" />
+            android:text="Moderate  साधारण" />
 
         <RadioButton
             android:id="@+id/radioButton4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Heavy" />
+            android:text="Heavy  भारी" />
     </RadioGroup>
 
     <Button
@@ -75,5 +76,16 @@
         android:layout_marginStart="85dp"
         android:onClick="previous"
         android:text="Previous" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button1"
+        android:layout_below="@+id/Options"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="Types Of Activities"
+        app:srcCompat="@drawable/types" />
 
 </RelativeLayout>

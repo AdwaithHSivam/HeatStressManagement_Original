@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -27,11 +28,13 @@ public class Login extends AppCompatActivity {
 
     GoogleSignInClient mGoogleSignInClient;
     FirebaseAuth mAuth;
+    ProgressBar progressBar;
     private static final int RC_SIGN_IN = 123;
 
     SignInButton signInButton;
 
     public void signIn() {
+        progressBar.setVisibility(View.VISIBLE);
         Log.d("abcde", "Yeah Trying to sign in");
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -69,7 +72,7 @@ public class Login extends AppCompatActivity {
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d("abcde", "firebaseAuthWithGoogle:" + acct.getId());
-
+        progressBar.setVisibility(View.VISIBLE);
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
@@ -78,7 +81,6 @@ public class Login extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("abcde", "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
                             onBackPressed();
                             //////updateUI(user);
 
@@ -107,6 +109,8 @@ public class Login extends AppCompatActivity {
         mGoogleSignInClient = GoogleSignIn.getClient(this,gso);
 
         mAuth=FirebaseAuth.getInstance();
+        progressBar = findViewById(R.id.progressBar4);
+        progressBar.setVisibility(View.GONE);
         signInButton= findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
         signInButton.setOnClickListener(new View.OnClickListener() {

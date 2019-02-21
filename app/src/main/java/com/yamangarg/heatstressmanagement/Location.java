@@ -1,6 +1,8 @@
 package com.yamangarg.heatstressmanagement;
 
 import android.Manifest;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,6 +21,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -26,10 +29,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -39,6 +47,8 @@ public class Location extends AppCompatActivity {
     int flag;
     Button signOut;
     Button editInfo;
+    ProgressBar progressBar;
+    String TAG ="abcde";
 
     public void editInfo(View view){
         startActivity(new Intent(this, Registration.class));
@@ -51,8 +61,34 @@ public class Location extends AppCompatActivity {
             startActivity(new Intent(this, Login.class));
         }
         else {
-            startActivity(new Intent(this, Question1.class));
+            DocumentReference docRef = FirebaseFirestore.getInstance().collection("userdata").document(currentUser.getUid());
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                            MyApplication.user.userData= document.toObject(UserData.class);
+                            MyApplication.user.setOk(true);
+                            {
+                                signOut.setVisibility(View.VISIBLE);
+                                editInfo.setVisibility(View.VISIBLE);
+                                progressBar.setVisibility(View.GONE);
+                            }
+                            startActivity(new Intent(Location.this, Question1.class));
+                        } else {
+                            Log.d(TAG, "No such document");
+                            startActivity(new Intent(Location.this, Registration.class));
+                        }
+                    } else {
+                        Log.d(TAG, "get failed with ", task.getException());
+                    }
+                }
+            });
+
         }
+
     }
 
     public void signOut(View view){
@@ -64,6 +100,20 @@ public class Location extends AppCompatActivity {
 
     LocationManager locationManager;
     LocationListener locationListener;
+
+    public void setAlarm(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 22);
+        Log.d("abcde", "setAlarm Begins");
+        Intent intent1 = new Intent(Location.this, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(Location.this, 0,intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager am = (AlarmManager) Location.this.getSystemService(Location.ALARM_SERVICE);
+        Log.d("abcde", "am = "+am.toString());
+        am.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+        Log.d("abcde", "setAlarm Ends");
+
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -127,6 +177,7 @@ public class Location extends AppCompatActivity {
 
     }
 
+
     @Override
     public void onBackPressed() {
         flag++;
@@ -148,10 +199,13 @@ public class Location extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
 
+        setAlarm();
         mAuth = FirebaseAuth.getInstance();
         flag = 0;
         signOut = findViewById(R.id.signOut);
         editInfo= findViewById(R.id.editInfo);
+        progressBar=findViewById(R.id.progressBar3);
+        progressBar.setVisibility(View.VISIBLE);
 
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
@@ -223,19 +277,37 @@ public class Location extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //mAuth.signOut();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser==null){
             startActivity(new Intent(this, Login.class));
         }
-        else if(!MyApplication.user.isOk){
-            startActivity(new Intent(this, Registration.class));
-        }
-        else{
-            signOut.setVisibility(View.VISIBLE);
-            editInfo.setVisibility(View.VISIBLE);
-        }
+        else {
+            DocumentReference docRef = FirebaseFirestore.getInstance().collection("userdata").document(currentUser.getUid());
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                            MyApplication.user.userData= document.toObject(UserData.class);
+                            MyApplication.user.setOk(true);
+                            {
+                                signOut.setVisibility(View.VISIBLE);
+                                editInfo.setVisibility(View.VISIBLE);
+                                progressBar.setVisibility(View.GONE);
+                            }
+                        } else {
+                            Log.d(TAG, "No such document");
+                            startActivity(new Intent(Location.this, Registration.class));
+                        }
+                    } else {
+                        Log.d(TAG, "get failed with ", task.getException());
+                    }
+                }
+            });
 
+        }
 
     }
 }
