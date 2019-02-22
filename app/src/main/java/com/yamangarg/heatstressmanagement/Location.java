@@ -76,7 +76,7 @@ public class Location extends AppCompatActivity {
                                 editInfo.setVisibility(View.VISIBLE);
                                 progressBar.setVisibility(View.GONE);
                             }
-                            startActivity(new Intent(Location.this, Question1.class));
+                            startActivity(new Intent(Location.this, QuestionsActivity.class));
                         } else {
                             Log.d(TAG, "No such document");
                             startActivity(new Intent(Location.this, Registration.class));
