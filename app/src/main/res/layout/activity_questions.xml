@@ -21,13 +21,14 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="4dp"
             android:text="How did you feel today? Select the stress level(comfort level) felt during peak hours (i.e. normally between 10:00AM to 4:00PM).\nआज आप कैसा महसूस कर रहे थे। गर्मी की तनाव की मात्रा अंकित करें(करीब 10 से 4 बजे के बीच में)।"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/infoImageView" />
 
         <RadioGroup
             android:id="@+id/OptionsA"
@@ -35,12 +36,12 @@
             android:layout_height="212dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="180dp"
+            android:layout_marginTop="46dp"
             android:layout_marginEnd="200dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/textViewA">
 
             <RadioButton
                 android:id="@+id/radioButton1A"
@@ -100,11 +101,11 @@
             android:layout_height="199dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewB">
+            app:layout_constraintTop_toBottomOf="@+id/typesImageView">
 
             <RadioButton
                 android:id="@+id/radioButton1B"
@@ -208,9 +209,10 @@
             android:layout_height="150dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="28dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.139"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewD">
 
@@ -267,14 +269,28 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/OptionsD" />
 
-        <LinearLayout
-            android:id="@+id/ll_mask"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/transparent"
-            android:clickable="true"
-            android:orientation="horizontal"
-            android:visibility="gone"/>
+
+
+        <ImageView
+            android:id="@+id/infoImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="393dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/info"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/typesImageView"
+            android:layout_width="391dp"
+            android:layout_height="321dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/types"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewB" />
+
 
 
     </android.support.constraint.ConstraintLayout>

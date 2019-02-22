@@ -12,12 +12,15 @@ public class QuestionsActivity extends Activity {
 
     RadioGroup optionsA,optionsB,optionsC,optionsD;
     User user;
-    String Qid[] = {"QuestionA","QuestionB","QuestionC","QuestionD"};
-    String OptionsA[] = {"Comfortable", "Raining", "Hot", "Very Hot", "Sweltering"};
-    String OptionsB[]={"NoActivity","Light","Moderate","Heavy"};
-    String OptionsC[]={"DirectSun","Shading","Indoors"};
-    String OptionsD[]={"FullCovered","Normal","Minimal"};
+    final String Qid[] = {"QuestionA","QuestionB","QuestionC","QuestionD"};
+    final String OptionsA[] = {"Comfortable", "Raining", "Hot", "Very Hot", "Sweltering"};
+    final String OptionsB[]={"NoActivity","Light","Moderate","Heavy"};
+    final String OptionsC[]={"DirectSun","Shading","Indoors"};
+    final String OptionsD[]={"FullCovered","Normal","Minimal"};
 
+    public void startProgressbar(){
+
+    }
 
     public void next(View view) {
         if (optionsA.getCheckedRadioButtonId() != -1)

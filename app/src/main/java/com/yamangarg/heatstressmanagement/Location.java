@@ -50,53 +50,6 @@ public class Location extends AppCompatActivity {
     ProgressBar progressBar;
     String TAG ="abcde";
 
-    public void editInfo(View view){
-        startActivity(new Intent(this, Registration.class));
-    }
-
-    public void startSurvey(View view) {
-
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser==null){
-            startActivity(new Intent(this, Login.class));
-        }
-        else {
-            DocumentReference docRef = FirebaseFirestore.getInstance().collection("userdata").document(currentUser.getUid());
-            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-                            Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                            MyApplication.user.userData= document.toObject(UserData.class);
-                            MyApplication.user.setOk(true);
-                            {
-                                signOut.setVisibility(View.VISIBLE);
-                                editInfo.setVisibility(View.VISIBLE);
-                                progressBar.setVisibility(View.GONE);
-                            }
-                            startActivity(new Intent(Location.this, QuestionsActivity.class));
-                        } else {
-                            Log.d(TAG, "No such document");
-                            startActivity(new Intent(Location.this, Registration.class));
-                        }
-                    } else {
-                        Log.d(TAG, "get failed with ", task.getException());
-                    }
-                }
-            });
-
-        }
-
-    }
-
-    public void signOut(View view){
-
-        mAuth.signOut();
-        signOut.setVisibility(View.INVISIBLE);
-        editInfo.setVisibility(View.INVISIBLE);
-    }
 
     LocationManager locationManager;
     LocationListener locationListener;
@@ -202,8 +155,6 @@ public class Location extends AppCompatActivity {
         setAlarm();
         mAuth = FirebaseAuth.getInstance();
         flag = 0;
-        signOut = findViewById(R.id.signOut);
-        editInfo= findViewById(R.id.editInfo);
         progressBar=findViewById(R.id.progressBar3);
         progressBar.setVisibility(View.VISIBLE);
 
@@ -292,11 +243,9 @@ public class Location extends AppCompatActivity {
                             Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                             MyApplication.user.userData= document.toObject(UserData.class);
                             MyApplication.user.setOk(true);
-                            {
-                                signOut.setVisibility(View.VISIBLE);
-                                editInfo.setVisibility(View.VISIBLE);
-                                progressBar.setVisibility(View.GONE);
-                            }
+                            progressBar.setVisibility(View.GONE);
+                            startActivity(new Intent(Location.this, QuestionsActivity.class));
+
                         } else {
                             Log.d(TAG, "No such document");
                             startActivity(new Intent(Location.this, Registration.class));
