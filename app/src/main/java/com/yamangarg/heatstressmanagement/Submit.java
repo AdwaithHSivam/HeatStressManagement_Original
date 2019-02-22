@@ -48,16 +48,15 @@ public class Submit extends AppCompatActivity {
         if(flag) {
             progressBar.setVisibility(View.VISIBLE);
             db.collection("responses")
-                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid()+" -" +DateFormat.getDateTimeInstance().format(new Date()))
+                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid()+" -" +DateFormat.getDateInstance().format(new Date()))
                     .set(user.responseObject)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
                                 Toast.makeText(getApplicationContext(),"Response Submission Successful",Toast.LENGTH_SHORT).show();
-                                Intent i =new Intent(Submit.this, Location.class);
-                                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(i);
+
+                                onBackPressed();
 
                             }
                             else {

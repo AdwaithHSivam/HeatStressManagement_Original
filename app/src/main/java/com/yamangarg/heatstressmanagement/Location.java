@@ -20,15 +20,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,15 +32,11 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Location extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     int flag;
-    Button signOut;
-    Button editInfo;
     ProgressBar progressBar;
     String TAG ="abcde";
 
@@ -133,18 +123,7 @@ public class Location extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        flag++;
-        if (flag > 1) {
-            super.onBackPressed();
-        } else {
-            Toast.makeText(this, "Press Back Again to Exit", Toast.LENGTH_SHORT).show();
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    flag=0;
-                }
-            },2000);
-        }
+
     }
 
     @Override
@@ -245,11 +224,12 @@ public class Location extends AppCompatActivity {
                             MyApplication.user.setOk(true);
                             progressBar.setVisibility(View.GONE);
                             startActivity(new Intent(Location.this, QuestionsActivity.class));
-
+                            finish();
                         } else {
                             Log.d(TAG, "No such document");
                             startActivity(new Intent(Location.this, Registration.class));
                         }
+
                     } else {
                         Log.d(TAG, "get failed with ", task.getException());
                     }

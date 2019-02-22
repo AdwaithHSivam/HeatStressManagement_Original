@@ -51,28 +51,28 @@
                 android:text="Comfortable  अनुकूल" />
 
             <RadioButton
-                android:id="@+id/radioButton3A"
+                android:id="@+id/radioButton2A"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Hot  गरम" />
 
             <RadioButton
-                android:id="@+id/radioButton4A"
+                android:id="@+id/radioButton3A"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Very Hot  बहुत गर्म" />
 
             <RadioButton
-                android:id="@+id/radioButton5A"
+                android:id="@+id/radioButton4A"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Sweltering  बेहद गरम" />
 
             <RadioButton
-                android:id="@+id/radioButton2A"
+                android:id="@+id/radioButton5A"
                 android:layout_width="wrap_content"
                 android:layout_height="42dp"
                 android:layout_weight="1"
@@ -244,28 +244,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="68dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
             android:onClick="next"
             android:text="Next"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.65"
-            app:layout_constraintStart_toEndOf="@+id/button_previous"
-            app:layout_constraintTop_toBottomOf="@+id/OptionsD" />
-
-        <Button
-            android:id="@+id/button_previous"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/button_next"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="40dp"
-            android:onClick="previous"
-            android:text="Previous"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/OptionsD" />
 
