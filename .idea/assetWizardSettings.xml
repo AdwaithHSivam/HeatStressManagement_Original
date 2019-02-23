@@ -61,7 +61,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="color" value="802020" />
+                                                <entry key="color" value="ea0d0d" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
@@ -73,7 +73,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="fontFamily" value="Cooper Black" />
+                                                <entry key="fontFamily" value="Droid Serif" />
                                                 <entry key="text" value="H" />
                                               </map>
                                             </option>
@@ -84,8 +84,12 @@
                                   </option>
                                   <option name="values">
                                     <map>
+                                      <entry key="backgroundAssetType" value="COLOR" />
+                                      <entry key="backgroundColor" value="f39430" />
                                       <entry key="foregroundAssetType" value="TEXT" />
                                       <entry key="foregroundImage" value="C:\Users\HP\Desktop\Project - Drawing 12159963209582174720.png" />
+                                      <entry key="legacyIconShape" value="CIRCLE" />
+                                      <entry key="webIconShape" value="CIRCLE" />
                                     </map>
                                   </option>
                                 </PersistentState>

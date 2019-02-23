@@ -36,7 +36,6 @@ import java.util.Calendar;
 public class Location extends AppCompatActivity {
 
     FirebaseAuth mAuth;
-    int flag;
     ProgressBar progressBar;
     String TAG ="abcde";
 
@@ -133,7 +132,6 @@ public class Location extends AppCompatActivity {
 
         setAlarm();
         mAuth = FirebaseAuth.getInstance();
-        flag = 0;
         progressBar=findViewById(R.id.progressBar3);
         progressBar.setVisibility(View.VISIBLE);
 
