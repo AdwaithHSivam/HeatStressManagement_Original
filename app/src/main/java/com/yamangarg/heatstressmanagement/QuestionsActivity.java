@@ -80,7 +80,6 @@ public class QuestionsActivity extends Activity {
             user.AddResponse(Qid[2], OptionsC[getOptionC()]);
         if (optionsA.getCheckedRadioButtonId() != -1)
             user.AddResponse(Qid[3], OptionsD[getOptionD()]);
-        Log.d("abcde", user.toString());
 
 
         FirebaseFirestore.getInstance().collection("responses")
