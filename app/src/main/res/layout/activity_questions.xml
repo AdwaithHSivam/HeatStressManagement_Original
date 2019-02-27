@@ -31,8 +31,8 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="32dp"
-                android:text="How did you feel today? Select the stress level(comfort level) felt during peak hours (i.e. normally between 10:00AM to 4:00PM).\nआज आप कैसा महसूस कर रहे थे। गर्मी की तनाव की मात्रा अंकित करें(करीब 10 से 4 बजे के बीच में)।"
-                android:textSize="24sp"
+                android:text="How did you feel today? \nआज आप कैसा महसूस कर रहे थे?"
+                android:textSize="@string/QFontSize"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/infoImageView" />
@@ -54,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Comfortable  अनुकूल"
-                    android:textSize="24sp" />
+                    android:textSize="@string/AFontSize" />
 
                 <RadioButton
                     android:id="@+id/radioButton2A"
@@ -62,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Hot  गरम"
-                    android:textSize="24sp" />
+                    android:textSize="@string/AFontSize" />
 
                 <RadioButton
                     android:id="@+id/radioButton3A"
@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Very Hot  बहुत गर्म"
-                    android:textSize="24sp" />
+                    android:textSize="@string/AFontSize" />
 
                 <RadioButton
                     android:id="@+id/radioButton4A"
@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Sweltering  बेहद गरम"
-                    android:textSize="24sp" />
+                    android:textSize="@string/AFontSize" />
 
                 <RadioButton
                     android:id="@+id/radioButton5A"
@@ -86,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Was it raining?  क्या बारिश हो रही थी?"
-                    android:textSize="24sp" />
+                    android:textSize="@string/AFontSize" />
             </RadioGroup>
 
             <TextView
@@ -100,7 +100,7 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="4dp"
                 android:text="Which kind of activity were you involved with today ?\nआप आज किस तरह के कार्य कर रहे थे?"
-                android:textSize="24sp"
+                android:textSize="@string/QFontSize"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/OptionsA" />
@@ -121,7 +121,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="No activity (taking rest, sleeping in comfortable room)  कोई कार्य नही(आराम करना, सोना)"
-                    android:textSize="24sp" />
+                    android:textSize="@string/AFontSize" />
 
                 <RadioButton
                     android:id="@+id/radioButton3B"
@@ -129,7 +129,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Moderate  साधारण"
-                    android:textSize="24sp" />
+                    android:textSize="@string/AFontSize" />
 
                 <RadioButton
                     android:id="@+id/radioButton4B"
@@ -137,7 +137,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Heavy  भारी"
-                    android:textSize="24sp" />
+                    android:textSize="@string/AFontSize" />
 
                 <RadioButton
                     android:id="@+id/radioButton2B"
@@ -145,27 +145,27 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Light  हल्का"
-                    android:textSize="24sp" />
+                    android:textSize="@string/AFontSize" />
             </RadioGroup>
 
             <TextView
                 android:id="@+id/textViewC"
                 style="@style/WhiteText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="347dp"
+                android:layout_height="64dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginEnd="64dp"
                 android:text="Working Condition\nकार्यकरने की स्तिति"
-                android:textSize="24sp"
+                android:textSize="@string/QFontSize"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.25"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/OptionsB" />
 
             <RadioGroup
                 android:id="@+id/OptionsC"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="410dp"
+                android:layout_height="89dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="14dp"
@@ -179,7 +179,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Exposed to direct sun  धूप में"
-                    android:textSize="24sp" />
+                    android:textSize="@string/AFontSize" />
 
                 <RadioButton
                     android:id="@+id/radioButton2C"
@@ -187,7 +187,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Shading  छाव में"
-                    android:textSize="24sp" />
+                    android:textSize="@string/AFontSize" />
 
                 <RadioButton
                     android:id="@+id/radioButton3C"
@@ -195,7 +195,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Indoor  घर के अंदर"
-                    android:textSize="24sp" />
+                    android:textSize="@string/AFontSize" />
             </RadioGroup>
 
             <TextView
@@ -209,7 +209,7 @@
                 android:layout_marginTop="26dp"
                 android:layout_marginEnd="8dp"
                 android:text="Clothing  आपने किस प्रकार के वस्त्र पहने थे?"
-                android:textSize="24sp"
+                android:textSize="@string/QFontSize"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/OptionsC" />
@@ -231,7 +231,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Fully Covered(hands and face also protected)"
-                    android:textSize="24sp" />
+                    android:textSize="@string/AFontSize" />
 
                 <RadioButton
                     android:id="@+id/radioButton2D"
@@ -239,7 +239,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Normal Dress"
-                    android:textSize="24sp" />
+                    android:textSize="@string/AFontSize" />
 
                 <RadioButton
                     android:id="@+id/radioButton3D"
@@ -247,7 +247,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Minimal (e.g. top and shorts)"
-                    android:textSize="24sp" />
+                    android:textSize="@string/AFontSize" />
             </RadioGroup>
 
             <Button
@@ -311,7 +311,7 @@
                 android:layout_marginBottom="32dp"
                 android:autoLink="web"
                 android:linksClickable="true"
-                android:text="https://drive.google.com/open?id=1GtH-ALYlWV_9ppiavzlBi-kY5DfNBgsx"
+                android:text="@string/hyperlink"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
