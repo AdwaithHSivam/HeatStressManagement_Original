@@ -24,22 +24,39 @@ import java.util.Date;
 
 public class QuestionsActivity extends Activity {
 
-    RadioGroup optionsA,optionsB,optionsC,optionsD;
+    RadioGroup optionsAa,optionsAb,optionsAc,optionsB,optionsC,optionsD;
     ProgressBar progressBar;
     User user;
-    final String Qid[] = {"QuestionA","QuestionB","QuestionC","QuestionD"};
-    final String OptionsA[] = {"Comfortable", "Hot", "Very Hot", "Sweltering","Raining"};
+    final String Qid[] = {"QuestionAa","QuestionAb","QuestionAc","QuestionB","QuestionC","QuestionD"};
+    final String OptionsAa[] = {"DryHot", "Windy", "Humid", "Rainy"};
+    final String OptionsAb[] = {"1100-1330", "1330-1600"};
+    final String OptionsAc[] = {"Comfortable", "Warm", "Very Hot", "Sweltering"};
     final String OptionsB[]={"NoActivity","Light","Moderate","Heavy"};
-    final String OptionsC[]={"DirectSun","Shading","Indoors"};
+    final String OptionsC[]={"DirectSun","Shading","Indoor"};
     final String OptionsD[]={"FullCovered","Normal","Minimal"};
 
-    int getOptionA(){
-        switch (optionsA.getCheckedRadioButtonId()){
-            case R.id.radioButton1A: return 0;
-            case R.id.radioButton2A: return 1;
-            case R.id.radioButton3A: return 2;
-            case R.id.radioButton4A: return 3;
-            case R.id.radioButton5A: return 4;
+    int getOptionAa(){
+        switch (optionsAa.getCheckedRadioButtonId()){
+            case R.id.radioButton1Aa: return 0;
+            case R.id.radioButton2Aa: return 1;
+            case R.id.radioButton3Aa: return 2;
+            case R.id.radioButton4Aa: return 3;
+        }
+        return 0;
+    }
+    int getOptionAb(){
+        switch (optionsAb.getCheckedRadioButtonId()){
+            case R.id.radioButton1Ab: return 0;
+            case R.id.radioButton2Ab: return 1;
+        }
+        return 0;
+    }
+    int getOptionAc(){
+        switch (optionsAc.getCheckedRadioButtonId()){
+            case R.id.radioButton1Ac: return 0;
+            case R.id.radioButton2Ac: return 1;
+            case R.id.radioButton3Ac: return 2;
+            case R.id.radioButton4Ac: return 3;
         }
         return 0;
     }
@@ -72,14 +89,18 @@ public class QuestionsActivity extends Activity {
     public void submit(View view) {
 
         progressBar.setVisibility(View.VISIBLE);
-        if (optionsA.getCheckedRadioButtonId() != -1)
-            user.AddResponse(Qid[0], OptionsA[getOptionA()]);
+        if (optionsAa.getCheckedRadioButtonId() != -1)
+            user.AddResponse(Qid[0], OptionsAa[getOptionAa()]);
+        if (optionsAb.getCheckedRadioButtonId() != -1)
+            user.AddResponse(Qid[1], OptionsAb[getOptionAb()]);
+        if (optionsAc.getCheckedRadioButtonId() != -1)
+            user.AddResponse(Qid[2], OptionsAc[getOptionAc()]);
         if (optionsB.getCheckedRadioButtonId() != -1)
-            user.AddResponse(Qid[1], OptionsB[getOptionB()]);
-        if (optionsA.getCheckedRadioButtonId() != -1)
-            user.AddResponse(Qid[2], OptionsC[getOptionC()]);
-        if (optionsA.getCheckedRadioButtonId() != -1)
-            user.AddResponse(Qid[3], OptionsD[getOptionD()]);
+            user.AddResponse(Qid[3], OptionsB[getOptionB()]);
+        if (optionsC.getCheckedRadioButtonId() != -1)
+            user.AddResponse(Qid[4], OptionsC[getOptionC()]);
+        if (optionsD.getCheckedRadioButtonId() != -1)
+            user.AddResponse(Qid[5], OptionsD[getOptionD()]);
         Log.d("abcde", user.toString());
 
 
@@ -113,7 +134,9 @@ public class QuestionsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
 
-        optionsA = findViewById(R.id.OptionsA);
+        optionsAa = findViewById(R.id.OptionsAa);
+        optionsAb = findViewById(R.id.OptionsAb);
+        optionsAc = findViewById(R.id.OptionsAc);
         optionsB = findViewById(R.id.OptionsB);
         optionsC = findViewById(R.id.OptionsC);
         optionsD = findViewById(R.id.OptionsD);

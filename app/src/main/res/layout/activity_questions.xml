@@ -32,7 +32,113 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textViewA"
+                android:id="@+id/textViewAa"
+                style="@style/WhiteText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:text="How is the day? दिन कैसा है?"
+                android:textSize="26sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/infoImageView" />
+
+            <RadioGroup
+                android:id="@+id/OptionsAa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="36dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewAa">
+
+                <RadioButton
+                    android:id="@+id/radioButton1Aa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Dry and Hot सूखा और गर्म"
+                    android:textSize="17sp" />
+
+                <RadioButton
+                    android:id="@+id/radioButton2Aa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Windy  तूफानी"
+                    android:textSize="17sp" />
+
+                <RadioButton
+                    android:id="@+id/radioButton3Aa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Humid  नम"
+                    android:textSize="17sp" />
+
+                <RadioButton
+                    android:id="@+id/radioButton4Aa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Rainy बरसाती"
+                    android:textSize="17sp" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textViewAb"
+                style="@style/WhiteText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:text="Choose the time when you felt max discomfort\n आपको अधिकतम असुविधा कब हुई?"
+                android:textSize="26sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/OptionsAa" />
+
+            <RadioGroup
+                android:id="@+id/OptionsAb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="36dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewAb">
+
+                <RadioButton
+                    android:id="@+id/radioButton1Ab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="11:00AM to 1:30PM"
+                    android:textSize="17sp" />
+
+                <RadioButton
+                    android:id="@+id/radioButton2Ab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="1:30PM to 4:00PM"
+                    android:textSize="17sp" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textViewAc"
                 style="@style/WhiteText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -45,10 +151,10 @@
                 android:textSize="26sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/infoImageView" />
+                app:layout_constraintTop_toBottomOf="@+id/OptionsAb" />
 
             <RadioGroup
-                android:id="@+id/OptionsA"
+                android:id="@+id/OptionsAc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -56,10 +162,10 @@
                 android:layout_marginTop="36dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewA">
+                app:layout_constraintTop_toBottomOf="@+id/textViewAc">
 
                 <RadioButton
-                    android:id="@+id/radioButton1A"
+                    android:id="@+id/radioButton1Ac"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -67,15 +173,15 @@
                     android:textSize="17sp" />
 
                 <RadioButton
-                    android:id="@+id/radioButton2A"
+                    android:id="@+id/radioButton2Ac"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Hot  गरम"
+                    android:text="Warm गर्म"
                     android:textSize="17sp" />
 
                 <RadioButton
-                    android:id="@+id/radioButton3A"
+                    android:id="@+id/radioButton3Ac"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -83,20 +189,13 @@
                     android:textSize="17sp" />
 
                 <RadioButton
-                    android:id="@+id/radioButton4A"
+                    android:id="@+id/radioButton4Ac"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Sweltering  बेहद गरम"
+                    android:text="Sweltering तपती"
                     android:textSize="17sp" />
 
-                <RadioButton
-                    android:id="@+id/radioButton5A"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Was it raining?  क्या बारिश हो रही थी?"
-                    android:textSize="17sp" />
             </RadioGroup>
 
             <TextView
@@ -113,7 +212,7 @@
                 android:textSize="26sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/OptionsA" />
+                app:layout_constraintTop_toBottomOf="@+id/OptionsAc" />
 
             <ImageView
                 android:id="@+id/typesImageView"
@@ -160,7 +259,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Moderate  साधारण"
+                    android:text="Light  हल्का"
                     android:textSize="17sp" />
 
                 <RadioButton
@@ -168,7 +267,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Heavy  भारी"
+                    android:text="Moderate  साधारण"
                     android:textSize="17sp" />
 
                 <RadioButton
@@ -176,7 +275,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Light  हल्का"
+                    android:text="Heavy  भारी"
                     android:textSize="17sp" />
             </RadioGroup>
 
@@ -290,7 +389,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="32dp"
                 android:onClick="submit"
-                android:text="Submit"
+                android:text="@string/submit"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/OptionsD" />
@@ -304,7 +403,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="0dp"
                 android:text="For more info"
@@ -322,11 +421,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
-                android:layout_marginEnd="32dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="32dp"
                 android:autoLink="web"
                 android:linksClickable="true"
-                android:text="https://drive.google.com/open?id=1GtH-ALYlWV_9ppiavzlBi-kY5DfNBgsx"
+                android:text="@string/hyperlink"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
