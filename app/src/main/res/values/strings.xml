@@ -7,4 +7,5 @@
 
     <string name="QFontSize">26sp</string>
     <string name="AFontSize">22sp</string>
+    <string name="title_activity_questions2">QuestionsActivity2</string>
 </resources>
