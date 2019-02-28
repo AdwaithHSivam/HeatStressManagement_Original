@@ -123,7 +123,19 @@
                 android:src="@drawable/types"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewB" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewB"
+                android:contentDescription="Types Of Work" />
+
+            <ImageView
+                android:id="@+id/types2ImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="321dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/types2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/typesImageView"
+                android:contentDescription="Types of Work Hindi" />
 
             <RadioGroup
                 android:id="@+id/OptionsB"
@@ -133,7 +145,7 @@
                 android:layout_alignParentTop="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/typesImageView">
+                app:layout_constraintTop_toBottomOf="@+id/types2ImageView">
 
                 <RadioButton
                     android:id="@+id/radioButton1B"
@@ -184,11 +196,11 @@
 
             <RadioGroup
                 android:id="@+id/OptionsC"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="342dp"
+                android:layout_height="88dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="14dp"
+                android:layout_margin="8sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewC">
