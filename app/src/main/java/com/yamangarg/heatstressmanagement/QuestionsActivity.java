@@ -130,8 +130,8 @@ public class QuestionsActivity extends Activity {
             Log.d("abcde", "onCreate: "+Html.fromHtml(linkText));
             link.setText(Html.fromHtml(linkText));
         }
-        Log.d("abcde", "onCreate: "+link.getText().toString());
-        link.setMovementMethod(LinkMovementMethod.getInstance());*/
+        Log.d("abcde", "onCreate: "+link.getText().toString());*/
+        link.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
 }

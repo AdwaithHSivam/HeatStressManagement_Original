@@ -13,23 +13,13 @@
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteX="25dp"
         tools:layout_editor_absoluteY="0dp">
 
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/infoImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="393dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/info"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textViewA"
@@ -114,26 +104,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/OptionsA" />
-
-            <ImageView
-                android:id="@+id/typesImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="321dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/types"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewB" />
-
-            <ImageView
-                android:id="@+id/types2ImageView"
-                android:layout_width="372dp"
-                android:layout_height="321dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/types2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/typesImageView" />
 
             <RadioGroup
                 android:id="@+id/OptionsB"
@@ -293,6 +263,36 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/OptionsD" />
 
+
+            <ImageView
+                android:id="@+id/infoImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="393dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/info"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/typesImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="321dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/types"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewB" />
+
+            <ImageView
+                android:id="@+id/types2ImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="321dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/types2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/typesImageView" />
 
             <TextView
                 android:id="@+id/hyperlinkText"
