@@ -56,7 +56,7 @@ public class Login extends AppCompatActivity {
                     firebaseAuthWithGoogle(account);
                 }
                 else{
-                    //Log.d("abcde","account is null");
+                    Log.d("abcde","account is null");
                 }
 
 
@@ -64,14 +64,14 @@ public class Login extends AppCompatActivity {
 
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
-                //Log.w("abcde", "Google sign in failed", e);
+                Log.w("abcde", "Google sign in failed", e);
                 // ...
             }
         }
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        //Log.d("abcde", "firebaseAuthWithGoogle:" + acct.getId());
+        Log.d("abcde", "firebaseAuthWithGoogle:" + acct.getId());
         progressBar.setVisibility(View.VISIBLE);
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
@@ -80,13 +80,13 @@ public class Login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            //Log.d("abcde", "signInWithCredential:success");
+                            Log.d("abcde", "signInWithCredential:success");
                             onBackPressed();
                             //////updateUI(user);
 
                         } else {
                             // If sign in fails, display a message to the user.
-                            //Log.w("abcde", "signInWithCredential:failure", task.getException());
+                            Log.w("abcde", "signInWithCredential:failure", task.getException());
                             Snackbar.make(findViewById(R.id.main_layout), "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
                             /////updateUI(null);
 

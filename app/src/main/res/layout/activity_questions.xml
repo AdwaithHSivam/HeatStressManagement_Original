@@ -113,7 +113,7 @@
                 android:layout_alignParentTop="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/types2ImageView">
+                app:layout_constraintTop_toBottomOf="@+id/typesImageView">
 
                 <RadioButton
                     android:id="@+id/radioButton1B"
@@ -283,16 +283,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewB" />
-
-            <ImageView
-                android:id="@+id/types2ImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="321dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/types"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/typesImageView" />
 
             <TextView
                 android:id="@+id/hyperlinkText"

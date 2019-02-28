@@ -44,7 +44,7 @@ public class Registration extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-        //Log.d("abcde", "Message1");
+        Log.d("abcde", "Message1");
 
         mAuth=FirebaseAuth.getInstance();
         firstName = findViewById(R.id.firstName);
@@ -59,7 +59,7 @@ public class Registration extends AppCompatActivity {
 
         email.setText(mAuth.getCurrentUser().getEmail());
         email.setEnabled(false);
-        //Log.d("abcde", "Message2");
+        Log.d("abcde", "Message2");
     }
 
     @Override
