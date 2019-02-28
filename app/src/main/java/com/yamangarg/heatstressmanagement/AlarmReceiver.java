@@ -35,8 +35,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setContentTitle("Time for your Daily Survey")
                 .setContentText("Lets do this.").setSound(alarmSound)
                 .setAutoCancel(true).setWhen(when)
-                .setContentIntent(pendingIntent)
-                .setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
+                .setContentIntent(pendingIntent);
         notificationManager.notify(MID, mNotifyBuilder.build());
         MID++;
 

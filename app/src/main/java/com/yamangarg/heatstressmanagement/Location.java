@@ -20,15 +20,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,65 +32,13 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Location extends AppCompatActivity {
 
     FirebaseAuth mAuth;
-    int flag;
-    Button signOut;
-    Button editInfo;
     ProgressBar progressBar;
     String TAG ="abcde";
 
-    public void editInfo(View view){
-        startActivity(new Intent(this, Registration.class));
-    }
-
-    public void startSurvey(View view) {
-
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser==null){
-            startActivity(new Intent(this, Login.class));
-        }
-        else {
-            DocumentReference docRef = FirebaseFirestore.getInstance().collection("userdata").document(currentUser.getUid());
-            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-                            Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                            MyApplication.user.userData= document.toObject(UserData.class);
-                            MyApplication.user.setOk(true);
-                            {
-                                signOut.setVisibility(View.VISIBLE);
-                                editInfo.setVisibility(View.VISIBLE);
-                                progressBar.setVisibility(View.GONE);
-                            }
-                            startActivity(new Intent(Location.this, Question1.class));
-                        } else {
-                            Log.d(TAG, "No such document");
-                            startActivity(new Intent(Location.this, Registration.class));
-                        }
-                    } else {
-                        Log.d(TAG, "get failed with ", task.getException());
-                    }
-                }
-            });
-
-        }
-
-    }
-
-    public void signOut(View view){
-
-        mAuth.signOut();
-        signOut.setVisibility(View.INVISIBLE);
-        editInfo.setVisibility(View.INVISIBLE);
-    }
 
     LocationManager locationManager;
     LocationListener locationListener;
@@ -180,18 +122,7 @@ public class Location extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        flag++;
-        if (flag > 1) {
-            super.onBackPressed();
-        } else {
-            Toast.makeText(this, "Press Back Again to Exit", Toast.LENGTH_SHORT).show();
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    flag=0;
-                }
-            },2000);
-        }
+
     }
 
     @Override
@@ -201,9 +132,6 @@ public class Location extends AppCompatActivity {
 
         setAlarm();
         mAuth = FirebaseAuth.getInstance();
-        flag = 0;
-        signOut = findViewById(R.id.signOut);
-        editInfo= findViewById(R.id.editInfo);
         progressBar=findViewById(R.id.progressBar3);
         progressBar.setVisibility(View.VISIBLE);
 
@@ -213,7 +141,7 @@ public class Location extends AppCompatActivity {
             @Override
             public void onLocationChanged(android.location.Location location) {
 
-                Log.i("Location", location.toString());
+                //Log.i("Location", location.toString());
                 MyApplication.user.responseObject.location = location;
 
             }
@@ -289,18 +217,17 @@ public class Location extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
-                            Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                            //Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                             MyApplication.user.userData= document.toObject(UserData.class);
                             MyApplication.user.setOk(true);
-                            {
-                                signOut.setVisibility(View.VISIBLE);
-                                editInfo.setVisibility(View.VISIBLE);
-                                progressBar.setVisibility(View.GONE);
-                            }
+                            progressBar.setVisibility(View.GONE);
+                            startActivity(new Intent(Location.this, QuestionsActivity.class));
+                            finish();
                         } else {
                             Log.d(TAG, "No such document");
                             startActivity(new Intent(Location.this, Registration.class));
                         }
+
                     } else {
                         Log.d(TAG, "get failed with ", task.getException());
                     }
