@@ -64,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Dry and Hot सूखा और गर्म"
-                    android:textSize="17sp" />
+                    android:textSize="18sp" />
 
                 <RadioButton
                     android:id="@+id/radioButton2Aa"
@@ -72,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Windy  तूफानी"
-                    android:textSize="17sp" />
+                    android:textSize="18sp" />
 
                 <RadioButton
                     android:id="@+id/radioButton3Aa"
@@ -80,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Humid  नम"
-                    android:textSize="17sp" />
+                    android:textSize="18sp" />
 
                 <RadioButton
                     android:id="@+id/radioButton4Aa"
@@ -88,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Rainy बरसाती"
-                    android:textSize="17sp" />
+                    android:textSize="18sp" />
 
             </RadioGroup>
 
@@ -125,7 +125,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="11:00AM to 1:30PM"
-                    android:textSize="17sp" />
+                    android:textSize="18sp" />
 
                 <RadioButton
                     android:id="@+id/radioButton2Ab"
@@ -133,7 +133,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="1:30PM to 4:00PM"
-                    android:textSize="17sp" />
+                    android:textSize="18sp" />
 
             </RadioGroup>
 
@@ -170,7 +170,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Comfortable  अनुकूल"
-                    android:textSize="17sp" />
+                    android:textSize="18sp" />
 
                 <RadioButton
                     android:id="@+id/radioButton2Ac"
@@ -178,7 +178,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Warm गर्म"
-                    android:textSize="17sp" />
+                    android:textSize="18sp" />
 
                 <RadioButton
                     android:id="@+id/radioButton3Ac"
@@ -186,7 +186,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Very Hot  बहुत गर्म"
-                    android:textSize="17sp" />
+                    android:textSize="18sp" />
 
                 <RadioButton
                     android:id="@+id/radioButton4Ac"
@@ -194,7 +194,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Sweltering तपती"
-                    android:textSize="17sp" />
+                    android:textSize="18sp" />
 
             </RadioGroup>
 
@@ -214,6 +214,50 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/OptionsAc" />
 
+
+            <RadioGroup
+                android:id="@+id/OptionsB"
+                android:layout_width="271dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewB">
+
+                <RadioButton
+                    android:id="@+id/radioButton1B"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="No activity (taking rest, sleeping in comfortable room)  कोई कार्य नही(आराम करना, सोना)"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/radioButton3B"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Light  हल्का"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/radioButton4B"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Moderate  साधारण"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/radioButton2B"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Heavy  भारी"
+                    android:textSize="18sp" />
+            </RadioGroup>
+
             <ImageView
                 android:id="@+id/typesImageView"
                 android:layout_width="wrap_content"
@@ -222,7 +266,7 @@
                 android:src="@drawable/types"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewB"
+                app:layout_constraintTop_toBottomOf="@+id/OptionsB"
                 android:contentDescription="Types Of Work" />
 
             <ImageView
@@ -236,49 +280,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/typesImageView"
                 android:contentDescription="Types of Work Hindi" />
 
-            <RadioGroup
-                android:id="@+id/OptionsB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/types2ImageView">
-
-                <RadioButton
-                    android:id="@+id/radioButton1B"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="No activity (taking rest, sleeping in comfortable room)  कोई कार्य नही(आराम करना, सोना)"
-                    android:textSize="17sp" />
-
-                <RadioButton
-                    android:id="@+id/radioButton3B"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Light  हल्का"
-                    android:textSize="17sp" />
-
-                <RadioButton
-                    android:id="@+id/radioButton4B"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Moderate  साधारण"
-                    android:textSize="17sp" />
-
-                <RadioButton
-                    android:id="@+id/radioButton2B"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Heavy  भारी"
-                    android:textSize="17sp" />
-            </RadioGroup>
-
             <TextView
                 android:id="@+id/textViewC"
                 style="@style/WhiteText"
@@ -291,11 +292,11 @@
                 android:textSize="26sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/OptionsB" />
+                app:layout_constraintTop_toBottomOf="@+id/types2ImageView" />
 
             <RadioGroup
                 android:id="@+id/OptionsC"
-                android:layout_width="342dp"
+                android:layout_width="204dp"
                 android:layout_height="88dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
@@ -310,7 +311,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Exposed to direct sun  धूप में"
-                    android:textSize="17sp" />
+                    android:textSize="18sp" />
 
                 <RadioButton
                     android:id="@+id/radioButton2C"
@@ -318,7 +319,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Shading  छाव में"
-                    android:textSize="17sp" />
+                    android:textSize="18sp" />
 
                 <RadioButton
                     android:id="@+id/radioButton3C"
@@ -326,7 +327,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Indoor  घर के अंदर"
-                    android:textSize="17sp" />
+                    android:textSize="18sp" />
             </RadioGroup>
 
             <TextView
@@ -347,7 +348,7 @@
 
             <RadioGroup
                 android:id="@+id/OptionsD"
-                android:layout_width="wrap_content"
+                android:layout_width="225dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
@@ -361,24 +362,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Fully Covered(hands and face also protected)"
-                    android:textSize="17sp" />
+                    android:text="Fully Covered(hands and face also protected)\n पूरी तरह से ढंका हुआ"
+                    android:textSize="18sp" />
 
                 <RadioButton
                     android:id="@+id/radioButton2D"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Normal Dress"
-                    android:textSize="17sp" />
+                    android:text="Normal Dress  साधारण"
+                    android:textSize="18sp" />
 
                 <RadioButton
                     android:id="@+id/radioButton3D"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Minimal (e.g. top and shorts)"
-                    android:textSize="17sp" />
+                    android:text="Minimal (e.g. top and shorts) \n न्यूनतम"
+                    android:textSize="18sp" />
             </RadioGroup>
 
             <Button
@@ -429,8 +430,10 @@
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.541"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/hyperlinkText">
+                app:layout_constraintTop_toBottomOf="@+id/hyperlinkText"
+                app:layout_constraintVertical_bias="1.0">
 
             </TextView>
 
