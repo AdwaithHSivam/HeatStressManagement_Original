@@ -141,7 +141,7 @@ public class Location extends AppCompatActivity {
             @Override
             public void onLocationChanged(android.location.Location location) {
 
-                Log.i("Location", location.toString());
+                //Log.i("Location", location.toString());
                 MyApplication.user.responseObject.location = location;
 
             }
@@ -217,7 +217,7 @@ public class Location extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
-                            Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                            //Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                             MyApplication.user.userData= document.toObject(UserData.class);
                             MyApplication.user.setOk(true);
                             progressBar.setVisibility(View.GONE);
