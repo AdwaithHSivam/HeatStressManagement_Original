@@ -13,7 +13,7 @@
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="0dp">
 
 
@@ -41,7 +41,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="32dp"
-                android:text="How is the day? दिन कैसा है?"
+                android:text="How is the day? आज का दिन कैसा है?"
                 android:textSize="26sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +102,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="32dp"
-                android:text="Choose the time when you felt max discomfort\n आपको अधिकतम असुविधा कब हुई?"
+                android:text="When did you feel maximum discomfort\n आपको अधिकतम असुविधा कब हुई?"
                 android:textSize="26sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -263,22 +263,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="321dp"
                 android:layout_marginTop="8dp"
+                android:contentDescription="Types Of Work"
                 android:src="@drawable/types"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/OptionsB"
-                android:contentDescription="Types Of Work" />
+                app:layout_constraintTop_toBottomOf="@+id/OptionsB" />
 
             <ImageView
                 android:id="@+id/types2ImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="321dp"
                 android:layout_marginTop="8dp"
+                android:contentDescription="Types of Work Hindi"
                 android:src="@drawable/types2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/typesImageView"
-                android:contentDescription="Types of Work Hindi" />
+                app:layout_constraintTop_toBottomOf="@+id/typesImageView" />
 
             <TextView
                 android:id="@+id/textViewC"
@@ -308,7 +308,7 @@
                 <RadioButton
                     android:id="@+id/radioButton1C"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="51dp"
                     android:layout_weight="1"
                     android:text="Exposed to direct sun  धूप में"
                     android:textSize="18sp" />
@@ -394,9 +394,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/OptionsD" />
-
-
-
 
 
             <TextView

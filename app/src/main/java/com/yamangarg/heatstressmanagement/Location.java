@@ -47,13 +47,13 @@ public class Location extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, 22);
-        Log.d("abcde", "setAlarm Begins");
+        //Log.d("abcde", "setAlarm Begins");
         Intent intent1 = new Intent(Location.this, AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(Location.this, 0,intent1, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager am = (AlarmManager) Location.this.getSystemService(Location.ALARM_SERVICE);
-        Log.d("abcde", "am = "+am.toString());
+        //Log.d("abcde", "am = "+am.toString());
         am.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-        Log.d("abcde", "setAlarm Ends");
+        //Log.d("abcde", "setAlarm Ends");
 
     }
 
@@ -224,12 +224,12 @@ public class Location extends AppCompatActivity {
                             startActivity(new Intent(Location.this, QuestionsActivity.class));
                             finish();
                         } else {
-                            Log.d(TAG, "No such document");
+                            //Log.d(TAG, "No such document");
                             startActivity(new Intent(Location.this, Registration.class));
                         }
 
                     } else {
-                        Log.d(TAG, "get failed with ", task.getException());
+                        //Log.d(TAG, "get failed with ", task.getException());
                     }
                 }
             });
