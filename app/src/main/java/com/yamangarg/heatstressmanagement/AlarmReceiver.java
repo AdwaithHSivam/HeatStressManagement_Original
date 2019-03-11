@@ -15,7 +15,6 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        // TODO Auto-generated method stub
 
         long when = System.currentTimeMillis();
         NotificationManager notificationManager = (NotificationManager) context
@@ -28,14 +27,15 @@ public class AlarmReceiver extends BroadcastReceiver {
                 notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
 
-        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         NotificationCompat.Builder mNotifyBuilder = new NotificationCompat.Builder(
-                context,"HSMChannel").setSmallIcon(R.drawable.ic_launcher_background)
+                context,"HSMChannel").setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentTitle("Time for your Daily Survey")
-                .setContentText("Lets do this.").setSound(alarmSound)
-                .setAutoCancel(true).setWhen(when)
-                .setContentIntent(pendingIntent);
+                .setContentText("Lets do this.")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true).setWhen(when);
+
         notificationManager.notify(MID, mNotifyBuilder.build());
         MID++;
 

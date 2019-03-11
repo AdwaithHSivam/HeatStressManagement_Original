@@ -42,7 +42,12 @@
 
         <activity android:name=".Registration" />
 
-        <receiver android:name=".AlarmReceiver" />
+        <receiver android:name=".AlarmReceiver" >
+            <intent-filter>
+                <action android:name="com.yamangarg.heatstressmanagement.ALARM_INTENT">
+                </action>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

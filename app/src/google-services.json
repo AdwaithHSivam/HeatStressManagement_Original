@@ -39,6 +39,14 @@
           }
         },
         {
+          "client_id": "1075865852598-o6bqbms54hu7am89j88tdd4rchpblind.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yamangarg.heatstressmanagement",
+            "certificate_hash": "1817f85c1bbdc6ec2dc104dbf6e8578218b9b547"
+          }
+        },
+        {
           "client_id": "1075865852598-u9mg4i3fjcq1mtctnldl8t055tvd664t.apps.googleusercontent.com",
           "client_type": 3
         }

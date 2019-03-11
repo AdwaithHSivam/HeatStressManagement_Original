@@ -2,6 +2,8 @@ package com.yamangarg.heatstressmanagement;
 
 import android.Manifest;
 import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -43,17 +45,25 @@ public class Location extends AppCompatActivity {
     LocationManager locationManager;
     LocationListener locationListener;
 
+    public void createNotificationChannel(){
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel("HSMChannel","HSMChannel", NotificationManager.IMPORTANCE_DEFAULT);
+            channel.setDescription("Channel of HSM App");
+            getSystemService(NotificationManager.class).createNotificationChannel(channel);
+        }
+    }
+
     public void setAlarm(){
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 14);
+        calendar.set(Calendar.HOUR_OF_DAY, 22);
         //Log.d("abcde", "setAlarm Begins");
-        Intent intent1 = new Intent(Location.this, AlarmReceiver.class);
+        Intent intent1 = new Intent(Location.this, AlarmReceiver.class).setAction("com.yamangarg.heatstressmanagement.ALARM_INTENT");
         PendingIntent pendingIntent = PendingIntent.getBroadcast(Location.this, 0,intent1, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager am = (AlarmManager) Location.this.getSystemService(Location.ALARM_SERVICE);
-        //Log.d("abcde", "am = "+am.toString());
+        Log.d("abcde", "am = "+am.toString());
         am.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-        //Log.d("abcde", "setAlarm Ends");
+        Log.d("abcde", "setAlarm Ends");
 
     }
 
