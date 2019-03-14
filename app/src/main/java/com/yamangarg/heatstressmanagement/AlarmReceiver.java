@@ -29,7 +29,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
 
         NotificationCompat.Builder mNotifyBuilder = new NotificationCompat.Builder(
-                context,"HSMChannel").setSmallIcon(R.drawable.ic_launcher_foreground)
+                context,"HSMChannel").setSmallIcon(R.drawable.ic_launcher_web)
                 .setContentTitle("Time for your Daily Survey")
                 .setContentText("Lets do this.")
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)

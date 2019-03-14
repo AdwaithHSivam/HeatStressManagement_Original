@@ -56,7 +56,7 @@ public class Location extends AppCompatActivity {
     public void setAlarm(){
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 22);
+        calendar.set(Calendar.HOUR_OF_DAY, 14);
         //Log.d("abcde", "setAlarm Begins");
         Intent intent1 = new Intent(Location.this, AlarmReceiver.class).setAction("com.yamangarg.heatstressmanagement.ALARM_INTENT");
         PendingIntent pendingIntent = PendingIntent.getBroadcast(Location.this, 0,intent1, PendingIntent.FLAG_UPDATE_CURRENT);
