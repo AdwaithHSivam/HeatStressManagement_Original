@@ -13,6 +13,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.SystemClock;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -37,6 +38,7 @@ import java.util.Calendar;
 
 public class Location extends AppCompatActivity {
 
+    private static final int NOTIFICATION_ID = 123;
     FirebaseAuth mAuth;
     ProgressBar progressBar;
     String TAG ="abcde";
@@ -45,25 +47,27 @@ public class Location extends AppCompatActivity {
     LocationManager locationManager;
     LocationListener locationListener;
 
-    public void createNotificationChannel(){
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
-            NotificationChannel channel = new NotificationChannel("HSMChannel","HSMChannel", NotificationManager.IMPORTANCE_DEFAULT);
-            channel.setDescription("Channel of HSM App");
-            getSystemService(NotificationManager.class).createNotificationChannel(channel);
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(getString(R.string.channel_name), name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
         }
     }
 
     public void setAlarm(){
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 14);
-        //Log.d("abcde", "setAlarm Begins");
-        Intent intent1 = new Intent(Location.this, AlarmReceiver.class).setAction("com.yamangarg.heatstressmanagement.ALARM_INTENT");
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(Location.this, 0,intent1, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager am = (AlarmManager) Location.this.getSystemService(Location.ALARM_SERVICE);
-        Log.d("abcde", "am = "+am.toString());
-        am.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-        Log.d("abcde", "setAlarm Ends");
+
+        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+
+        Intent intent = new Intent(this,AlarmReceiver.class);
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(this,NOTIFICATION_ID,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+AlarmManager.INTERVAL_FIFTEEN_MINUTES,AlarmManager.INTERVAL_FIFTEEN_MINUTES,alarmIntent);
 
     }
 
@@ -140,7 +144,10 @@ public class Location extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
 
+        createNotificationChannel();
         setAlarm();
+        Intent startIntent = new Intent(this,AlarmService.class);
+        startService(startIntent);
         mAuth = FirebaseAuth.getInstance();
         progressBar=findViewById(R.id.progressBar3);
         progressBar.setVisibility(View.VISIBLE);

@@ -5,4 +5,8 @@
 
     <string name="hyperlink">https://docs.google.com/presentation/d/1NGa1ph5s0SpwejeTwB9WzlcjpG0z1Sq0Aesf7_VEooA/edit#slide=id.p4</string>
     <string name="submit">Submit</string>
+    <string name="channel_name">HSMChannel123</string>
+    <string name="notification_title">Remainder</string>
+    <string name="notification_text">Its Survey Time.</string>
+    <string name="channel_description">Notification Channel of HSM App</string>
 </resources>
