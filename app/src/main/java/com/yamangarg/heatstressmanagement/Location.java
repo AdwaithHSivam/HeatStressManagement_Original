@@ -38,7 +38,6 @@ import java.util.Calendar;
 
 public class Location extends AppCompatActivity {
 
-    private static final int NOTIFICATION_ID = 123;
     FirebaseAuth mAuth;
     ProgressBar progressBar;
     String TAG ="abcde";
@@ -47,29 +46,7 @@ public class Location extends AppCompatActivity {
     LocationManager locationManager;
     LocationListener locationListener;
 
-    private void createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = getString(R.string.channel_name);
-            String description = getString(R.string.channel_description);
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(getString(R.string.channel_name), name, importance);
-            channel.setDescription(description);
 
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
-    }
-
-    public void setAlarm(){
-
-        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
-
-        Intent intent = new Intent(this,AlarmReceiver.class);
-        PendingIntent alarmIntent = PendingIntent.getBroadcast(this,NOTIFICATION_ID,intent,PendingIntent.FLAG_UPDATE_CURRENT);
-
-        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+AlarmManager.INTERVAL_FIFTEEN_MINUTES,AlarmManager.INTERVAL_FIFTEEN_MINUTES,alarmIntent);
-
-    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -144,10 +121,6 @@ public class Location extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
 
-        createNotificationChannel();
-        setAlarm();
-        Intent startIntent = new Intent(this,AlarmService.class);
-        startService(startIntent);
         mAuth = FirebaseAuth.getInstance();
         progressBar=findViewById(R.id.progressBar3);
         progressBar.setVisibility(View.VISIBLE);
