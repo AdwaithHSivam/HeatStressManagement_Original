@@ -29,11 +29,16 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class QuestionsActivity extends Activity {
 
@@ -43,64 +48,66 @@ public class QuestionsActivity extends Activity {
     RadioGroup whichDay, optionsAa,optionsAb,optionsAc,optionsB,optionsC,optionsD;
     ProgressBar progressBar;
     User user;
-    final String Qid[] = {"QuestionAa","QuestionAb","QuestionAc","QuestionB","QuestionC","QuestionD"};
-    final String OptionsAa[] = {"DryHot", "Windy", "Humid", "Rainy"};
-    final String OptionsAb[] = {"1100-1330", "1330-1600"};
-    final String OptionsAc[] = {"Comfortable", "Warm", "Very Hot", "Sweltering"};
-    final String OptionsB[]={"NoActivity","Light","Moderate","Heavy"};
-    final String OptionsC[]={"DirectSun","Shading","Indoor"};
-    final String OptionsD[]={"FullCovered","Normal","Minimal"};
 
-    int getOptionAa(){
-        switch (optionsAa.getCheckedRadioButtonId()){
-            case R.id.radioButton1Aa: return 0;
-            case R.id.radioButton2Aa: return 1;
-            case R.id.radioButton3Aa: return 2;
-            case R.id.radioButton4Aa: return 3;
-        }
-        return 0;
+
+    HashMap<String,BiMap> Qid = new HashMap<>();
+    HashMap<String,RadioGroup> Qradio = new HashMap<>();
+
+    BiMap<Integer,String> options_Aa=new BiMap<>();
+    BiMap<Integer,String> options_Ab=new BiMap<>();
+    BiMap<Integer,String> options_Ac=new BiMap<>();
+    BiMap<Integer,String> options_B=new BiMap<>();
+    BiMap<Integer,String> options_C=new BiMap<>();
+    BiMap<Integer,String> options_D=new BiMap<>();
+
+
+
+
+    private void initializeMap(){
+        options_Aa.put(R.id.radioButton1Aa,"DryHot");
+        options_Aa.put(R.id.radioButton2Aa,"Windy");
+        options_Aa.put(R.id.radioButton3Aa,"Humid");
+        options_Aa.put(R.id.radioButton4Aa,"Rainy");
+
+        options_Ab.put(R.id.radioButton1Ab,"1100-1330");
+        options_Ab.put(R.id.radioButton2Ab,"1330-1600");
+
+        options_Ac.put(R.id.radioButton1Ac,"Comfortable");
+        options_Ac.put(R.id.radioButton2Ac,"Warm");
+        options_Ac.put(R.id.radioButton3Ac,"VeryHot");
+        options_Ac.put(R.id.radioButton4Ac,"Sweltering");
+
+        options_B.put(R.id.radioButton1B,"NoActivity");
+        options_B.put(R.id.radioButton2B,"Light");
+        options_B.put(R.id.radioButton3B,"Moderate");
+        options_B.put(R.id.radioButton4B,"Heavy");
+
+        options_C.put(R.id.radioButton1C,"DirectSun");
+        options_C.put(R.id.radioButton2C,"Shading");
+        options_C.put(R.id.radioButton3C,"Indoor");
+
+        options_D.put(R.id.radioButton1D,"FullCovered");
+        options_D.put(R.id.radioButton1D,"Normal");
+        options_D.put(R.id.radioButton1D,"Minimal");
+
+        Qid.put("QuestionAa",options_Aa);
+        Qid.put("QuestionAb",options_Ab);
+        Qid.put("QuestionAc",options_Ac);
+        Qid.put("QuestionB",options_B);
+        Qid.put("QuestionC",options_C);
+        Qid.put("QuestionD",options_D);
+
+        Qradio.put("QuestionAa",optionsAa);
+        Qradio.put("QuestionAb",optionsAb);
+        Qradio.put("QuestionAc",optionsAc);
+        Qradio.put("QuestionB",optionsB);
+        Qradio.put("QuestionC",optionsC);
+        Qradio.put("QuestionD",optionsD);
+
+
     }
-    int getOptionAb(){
-        switch (optionsAb.getCheckedRadioButtonId()){
-            case R.id.radioButton1Ab: return 0;
-            case R.id.radioButton2Ab: return 1;
-        }
-        return 0;
-    }
-    int getOptionAc(){
-        switch (optionsAc.getCheckedRadioButtonId()){
-            case R.id.radioButton1Ac: return 0;
-            case R.id.radioButton2Ac: return 1;
-            case R.id.radioButton3Ac: return 2;
-            case R.id.radioButton4Ac: return 3;
-        }
-        return 0;
-    }
-    int getOptionB(){
-        switch (optionsB.getCheckedRadioButtonId()){
-            case R.id.radioButton1B: return 0;
-            case R.id.radioButton2B: return 1;
-            case R.id.radioButton3B: return 2;
-            case R.id.radioButton4B: return 3;
-        }
-        return 0;
-    }
-    int getOptionC(){
-        switch (optionsC.getCheckedRadioButtonId()){
-            case R.id.radioButton1C: return 0;
-            case R.id.radioButton2C: return 1;
-            case R.id.radioButton3C: return 2;
-        }
-        return 0;
-    }
-    int getOptionD(){
-        switch (optionsD.getCheckedRadioButtonId()){
-            case R.id.radioButton1D: return 0;
-            case R.id.radioButton2D: return 1;
-            case R.id.radioButton3D: return 2;
-        }
-        return 0;
-    }
+
+
 
     public void submit(View view) {
 
@@ -112,18 +119,14 @@ public class QuestionsActivity extends Activity {
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
-        if (optionsAa.getCheckedRadioButtonId() != -1)
-            user.AddResponse(Qid[0], OptionsAa[getOptionAa()]);
-        if (optionsAb.getCheckedRadioButtonId() != -1)
-            user.AddResponse(Qid[1], OptionsAb[getOptionAb()]);
-        if (optionsAc.getCheckedRadioButtonId() != -1)
-            user.AddResponse(Qid[2], OptionsAc[getOptionAc()]);
-        if (optionsB.getCheckedRadioButtonId() != -1)
-            user.AddResponse(Qid[3], OptionsB[getOptionB()]);
-        if (optionsC.getCheckedRadioButtonId() != -1)
-            user.AddResponse(Qid[4], OptionsC[getOptionC()]);
-        if (optionsD.getCheckedRadioButtonId() != -1)
-            user.AddResponse(Qid[5], OptionsD[getOptionD()]);
+
+        for (Map.Entry<String, BiMap> pair : Qid.entrySet()) {
+            user.AddResponse(pair.getKey(), (String) pair.getValue().map.get(Qradio.get(pair.getKey()).getCheckedRadioButtonId()));
+
+        }
+
+
+
         //Log.d("abcde", user.toString());
 
         if(whichDay.getCheckedRadioButtonId()==R.id.yesterday){
@@ -137,9 +140,24 @@ public class QuestionsActivity extends Activity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(getApplicationContext(),"Response Submission Successful",Toast.LENGTH_SHORT).show();
+                            FirebaseFirestore.getInstance().collection("responses")
+                                    .document(FirebaseAuth.getInstance().getCurrentUser().getUid()).collection("last_response").document( "last")
+                                    .set(user.responseObject.Responses)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if(task.isSuccessful()){
+                                                Toast.makeText(getApplicationContext(),"Response Submission Successful",Toast.LENGTH_SHORT).show();
 
-                            onBackPressed();
+                                                onBackPressed();
+
+                                            }
+                                            else {
+                                                Toast.makeText(getApplicationContext(),"Response Submission Unsuccessful",Toast.LENGTH_SHORT).show();
+                                                progressBar.setVisibility(View.GONE);
+                                            }
+                                        }
+                                    });
 
                         }
                         else {
@@ -148,6 +166,7 @@ public class QuestionsActivity extends Activity {
                         }
                     }
                 });
+
 
 
 
@@ -209,12 +228,38 @@ public class QuestionsActivity extends Activity {
         optionsD = findViewById(R.id.OptionsD);
         progressBar = findViewById(R.id.progressBarQ);
         user = MyApplication.user;
+        initializeMap();
         progressBar.setVisibility(View.GONE);
         TextView link = findViewById(R.id.hyperlink);
         link.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        DocumentReference docRef = FirebaseFirestore.getInstance().collection("responses")
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid()).collection("last_response").document( "last");
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        //Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                        MyApplication.user.responseObject.Responses= document.getData();
+                        for (Map.Entry<String, Object> pair : MyApplication.user.responseObject.Responses.entrySet()) {
+                            Object a = Qid.get(pair.getKey()).inversedMap.get(pair.getValue());
+                            if(a!=null) {
+                                Qradio.get(pair.getKey()).check(( int)a);
+                            }
+                        }
 
+                    }
+
+                }
+            }
+        });
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

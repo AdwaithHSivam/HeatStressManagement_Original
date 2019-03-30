@@ -7,11 +7,11 @@ import java.util.Map;
 
 @Keep
 public class ResponseClass {
-    public Map<String,String> Responses;
+    public Map<String, Object> Responses;
     public android.location.Location location;
 
     public ResponseClass(){
-        Responses= new HashMap<String,String>();
+        Responses= new HashMap<>();
     }
 
     public void AddResponse(String Q,String A){
