@@ -32,6 +32,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class QuestionsActivity extends Activity {
@@ -39,7 +40,7 @@ public class QuestionsActivity extends Activity {
     LocationManager locationManager;
     LocationListener locationListener;
 
-    RadioGroup optionsAa,optionsAb,optionsAc,optionsB,optionsC,optionsD;
+    RadioGroup whichDay, optionsAa,optionsAb,optionsAc,optionsB,optionsC,optionsD;
     ProgressBar progressBar;
     User user;
     final String Qid[] = {"QuestionAa","QuestionAb","QuestionAc","QuestionB","QuestionC","QuestionD"};
@@ -103,6 +104,9 @@ public class QuestionsActivity extends Activity {
 
     public void submit(View view) {
 
+        Calendar cal = Calendar.getInstance();
+
+
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
             showGPSDisabledAlertToUser();
             return;
@@ -120,11 +124,14 @@ public class QuestionsActivity extends Activity {
             user.AddResponse(Qid[4], OptionsC[getOptionC()]);
         if (optionsD.getCheckedRadioButtonId() != -1)
             user.AddResponse(Qid[5], OptionsD[getOptionD()]);
-        Log.d("abcde", user.toString());
+        //Log.d("abcde", user.toString());
 
+        if(whichDay.getCheckedRadioButtonId()==R.id.yesterday){
+            cal.add(Calendar.DATE, -1);
+        }
 
         FirebaseFirestore.getInstance().collection("responses")
-                .document(FirebaseAuth.getInstance().getCurrentUser().getUid()+" -" + DateFormat.getDateInstance().format(new Date()))
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid()).collection("responses_by_date").document( DateFormat.getDateInstance().format(cal.getTime()))
                 .set(user.responseObject)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -193,7 +200,7 @@ public class QuestionsActivity extends Activity {
             showGPSDisabledAlertToUser();
         }
 
-
+        whichDay = findViewById(R.id.whichDay);
         optionsAa = findViewById(R.id.OptionsAa);
         optionsAb = findViewById(R.id.OptionsAb);
         optionsAc = findViewById(R.id.OptionsAc);

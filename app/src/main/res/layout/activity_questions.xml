@@ -31,6 +31,42 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
+            <RadioGroup
+                android:id="@+id/whichDay"
+                android:layout_width="269dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="36dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/infoImageView">
+
+
+                <RadioButton
+                    android:id="@+id/yesterday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Yesterdays"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/today"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="Todays"
+                    android:textSize="18sp" />
+
+            </RadioGroup>
+
+
+
+
             <TextView
                 android:id="@+id/textViewAa"
                 style="@style/WhiteText"
@@ -45,7 +81,7 @@
                 android:textSize="26sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/infoImageView" />
+                app:layout_constraintTop_toBottomOf="@+id/whichDay" />
 
             <RadioGroup
                 android:id="@+id/OptionsAa"
@@ -433,6 +469,7 @@
                 app:layout_constraintVertical_bias="1.0">
 
             </TextView>
+
 
 
         </android.support.constraint.ConstraintLayout>
