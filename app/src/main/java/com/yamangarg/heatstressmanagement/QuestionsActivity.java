@@ -33,6 +33,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -186,7 +187,7 @@ public class QuestionsActivity extends Activity {
             public void onLocationChanged(android.location.Location location) {
 
                 //Log.i("Location", location.toString());
-                MyApplication.user.responseObject.location = location;
+                MyApplication.user.responseObject.geoPoint=new GeoPoint(location.getLatitude(),location.getLongitude());
 
             }
 

@@ -2,13 +2,15 @@ package com.yamangarg.heatstressmanagement;
 
 import android.support.annotation.Keep;
 
+import com.google.firebase.firestore.GeoPoint;
+
 import java.util.HashMap;
 import java.util.Map;
 
 @Keep
 public class ResponseClass {
     public Map<String, Object> Responses;
-    public android.location.Location location;
+    public GeoPoint geoPoint;
 
     public ResponseClass(){
         Responses= new HashMap<>();
