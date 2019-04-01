@@ -88,8 +88,8 @@ public class QuestionsActivity extends Activity {
         options_C.put(R.id.radioButton3C,"Indoor");
 
         options_D.put(R.id.radioButton1D,"FullCovered");
-        options_D.put(R.id.radioButton1D,"Normal");
-        options_D.put(R.id.radioButton1D,"Minimal");
+        options_D.put(R.id.radioButton2D,"Normal");
+        options_D.put(R.id.radioButton3D,"Minimal");
 
         Qid.put("QuestionAa",options_Aa);
         Qid.put("QuestionAb",options_Ab);

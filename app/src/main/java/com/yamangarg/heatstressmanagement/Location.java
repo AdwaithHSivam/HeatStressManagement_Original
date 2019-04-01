@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -49,7 +50,15 @@ public class Location extends AppCompatActivity {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser==null){
-            startActivity(new Intent(this, Login.class));
+            //startActivity(new Intent(this, Login.class));
+            mAuth.signInAnonymously().addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()) {
+                        startActivity(new Intent(Location.this, Registration.class));
+                    }
+                }
+            });
         }
         else {
             DocumentReference docRef = FirebaseFirestore.getInstance().collection("userdata").document(currentUser.getUid());
@@ -61,8 +70,6 @@ public class Location extends AppCompatActivity {
                         if (document.exists()) {
                             //Log.d(TAG, "DocumentSnapshot data: " + document.getData());
                             MyApplication.user.userData= document.toObject(UserData.class);
-                            MyApplication.user.setOk(true);
-                            progressBar.setVisibility(View.GONE);
                             startActivity(new Intent(Location.this, QuestionsActivity.class));
                             finish();
                         } else {

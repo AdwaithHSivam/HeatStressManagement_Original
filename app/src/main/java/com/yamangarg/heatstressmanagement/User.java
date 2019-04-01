@@ -18,14 +18,7 @@ public class User {
 
     }
 
-    /* User(String firstName, String lastName, String gender, String age, String email) {
-        FirstName = firstName;
-        LastName = lastName;
-        Gender = gender;
-        Age = age;
-        Email = email;
-        Responses= new HashMap<String,String>();
-    }*/
+
     public void setOk(boolean flag){
         isOk=flag;
     }
@@ -39,3 +32,4 @@ public class User {
     }
 
 }
+

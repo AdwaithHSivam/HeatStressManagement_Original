@@ -35,7 +35,6 @@ public class Login extends AppCompatActivity {
 
     public void signIn() {
         progressBar.setVisibility(View.VISIBLE);
-        //Log.d("abcde", "Yeah Trying to sign in");
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -50,19 +49,20 @@ public class Login extends AppCompatActivity {
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
-                // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                if (account != null) {
-                    firebaseAuthWithGoogle(account);
-                }
-                else{
-                    //Log.d("abcde","account is null");
-                }
+                    // Google Sign In was successful, authenticate with Firebase
+                    GoogleSignInAccount account = task.getResult(ApiException.class);
+                    if (account != null) {
+                        firebaseAuthWithGoogle(account);
+                    }
+                    else{
+                        //Log.d("abcde","account is null");
+                    }
 
 
 
 
-            } catch (ApiException e) {
+            }
+            catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 //Log.w("abcde", "Google sign in failed", e);
                 // ...
@@ -71,7 +71,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        //Log.d("abcde", "firebaseAuthWithGoogle:" + acct.getId());
+
         progressBar.setVisibility(View.VISIBLE);
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
@@ -79,20 +79,13 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            //Log.d("abcde", "signInWithCredential:success");
                             onBackPressed();
-                            //////updateUI(user);
 
                         } else {
-                            // If sign in fails, display a message to the user.
-                            //Log.w("abcde", "signInWithCredential:failure", task.getException());
                             Snackbar.make(findViewById(R.id.main_layout), "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
-                            /////updateUI(null);
 
                         }
 
-                        // ...
                     }
                 });
 

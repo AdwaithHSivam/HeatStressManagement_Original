@@ -55,10 +55,9 @@ public class Registration extends AppCompatActivity {
         register = findViewById(R.id.register);
         genderTextView = findViewById(R.id.genderTextView);
         ageTextView = findViewById(R.id.ageTextView);
-        progressBar = findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.progressBarR);
 
-        email.setText(mAuth.getCurrentUser().getEmail());
-        email.setEnabled(false);
+        //email.setText(mAuth.getCurrentUser().getEmail());
         //Log.d("abcde", "Message2");
     }
 
@@ -72,6 +71,7 @@ public class Registration extends AppCompatActivity {
 
     public void register(View view) {
 
+        progressBar.setVisibility(View.VISIBLE);
                 if(checkDataEntered()) {
                     MyApplication.user.userData.Uid=mAuth.getCurrentUser().getUid();
                     MyApplication.user
@@ -89,6 +89,7 @@ public class Registration extends AppCompatActivity {
                                     else {
                                         Toast.makeText(getApplicationContext(),"User Registration Unsuccessful",Toast.LENGTH_SHORT).show();
                                     }
+                                    progressBar.setVisibility(View.GONE);
                                 }
                             });
 
@@ -162,6 +163,10 @@ public class Registration extends AppCompatActivity {
             flag=false;
         }
 
+        if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()){
+            email.setError("Invalid Email Id");
+            flag=false;
+        }
 
         return flag;
     }

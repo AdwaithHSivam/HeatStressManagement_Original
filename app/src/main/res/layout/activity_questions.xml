@@ -50,7 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Yesterdays"
+                    android:text="Yesterday's"
                     android:textSize="18sp" />
 
                 <RadioButton
@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:checked="true"
-                    android:text="Todays"
+                    android:text="Today's"
                     android:textSize="18sp" />
 
             </RadioGroup>
