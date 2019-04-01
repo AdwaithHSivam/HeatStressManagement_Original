@@ -6,7 +6,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 28
         resConfigs "en"
-        versionCode 8
+        versionCode 10
         versionName "1.2.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
