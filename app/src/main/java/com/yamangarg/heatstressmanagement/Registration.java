@@ -75,7 +75,7 @@ public class Registration extends AppCompatActivity {
                 if(checkDataEntered()) {
                     MyApplication.user.userData.Uid=mAuth.getCurrentUser().getUid();
                     MyApplication.user
-                            .setValues(firstName.getText().toString(),lastName.getText().toString(),getGender(),getAgeR(),mAuth.getCurrentUser().getEmail());
+                            .setValues(firstName.getText().toString(),lastName.getText().toString(),getGender(),getAgeR(),email.getText().toString());
 
                     FirebaseFirestore.getInstance().collection("userdata").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(MyApplication.user.userData)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {

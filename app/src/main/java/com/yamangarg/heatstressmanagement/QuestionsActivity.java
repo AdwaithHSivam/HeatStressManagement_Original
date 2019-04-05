@@ -134,14 +134,19 @@ public class QuestionsActivity extends Activity {
             cal.add(Calendar.DATE, -1);
         }
 
-        FirebaseFirestore.getInstance().collection("responses")
+        Map a= new HashMap<>();
+        a.put("Uid",FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+        FirebaseFirestore.getInstance().collection("responses_3").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(a);
+
+        FirebaseFirestore.getInstance().collection("responses_3")
                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid()).collection("responses_by_date").document( DateFormat.getDateInstance().format(cal.getTime()))
                 .set(user.responseObject)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
-                            FirebaseFirestore.getInstance().collection("responses")
+                            FirebaseFirestore.getInstance().collection("responses_3")
                                     .document(FirebaseAuth.getInstance().getCurrentUser().getUid()).collection("last_response").document( "last")
                                     .set(user.responseObject.Responses)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -238,7 +243,7 @@ public class QuestionsActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-        DocumentReference docRef = FirebaseFirestore.getInstance().collection("responses")
+        DocumentReference docRef = FirebaseFirestore.getInstance().collection("responses_3")
                 .document(FirebaseAuth.getInstance().getCurrentUser().getUid()).collection("last_response").document( "last");
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
