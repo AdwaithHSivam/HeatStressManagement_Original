@@ -21,6 +21,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/RLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <EditText
+                    android:id="@+id/loc"
+                    android:layout_width="334dp"
+                    android:layout_height="184dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ProgressBar
+                    android:id="@+id/progressbarL"
+                    style="?android:attr/progressBarStyleSmall"
+                    android:layout_width="30dp"
+                    android:layout_height="29dp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="@id/loc"
+                    app:layout_constraintStart_toEndOf="@id/loc"
+                    app:layout_constraintTop_toTopOf="@id/loc" />
+            </android.support.constraint.ConstraintLayout>
+
             <ImageView
                 android:id="@+id/infoImageView"
                 android:layout_width="wrap_content"
@@ -29,7 +58,7 @@
                 android:src="@drawable/info"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/RLayout1" />
 
 
             <RadioGroup

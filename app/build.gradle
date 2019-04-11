@@ -6,8 +6,8 @@ android {
         minSdkVersion 21
         targetSdkVersion 28
         resConfigs "en"
-        versionCode 11
-        versionName "1.2.6"
+        versionCode 12
+        versionName "1.2.7"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

@@ -12,6 +12,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
+import android.os.Handler;
+import android.os.ResultReceiver;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -21,6 +23,7 @@ import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -47,8 +50,9 @@ public class QuestionsActivity extends Activity {
     LocationListener locationListener;
 
     RadioGroup whichDay, optionsAa,optionsAb,optionsAc,optionsB,optionsC,optionsD;
-    ProgressBar progressBar;
+    ProgressBar progressBar,progressBarL;
     User user;
+    EditText loc;
 
 
     HashMap<String,BiMap> Qid = new HashMap<>();
@@ -192,8 +196,19 @@ public class QuestionsActivity extends Activity {
             public void onLocationChanged(android.location.Location location) {
 
                 //Log.i("Location", location.toString());
-                MyApplication.user.responseObject.geoPoint=new GeoPoint(location.getLatitude(),location.getLongitude());
+                if (location!=null) {
+                    progressBarL.setVisibility(View.VISIBLE);
 
+                    AddressResultReceiver resultReceiver=new AddressResultReceiver(new Handler());
+
+                    MyApplication.user.responseObject.geoPoint = new GeoPoint(location.getLatitude(), location.getLongitude());
+
+                    Intent intent = new Intent(QuestionsActivity.this, FetchAddressIntentService.class);
+                    intent.putExtra(FetchAddressIntentService.RECEIVER, resultReceiver);
+                    intent.putExtra(FetchAddressIntentService.LOCATION_DATA_EXTRA, location);
+                    startService(intent);
+
+                }
             }
 
             @Override
@@ -233,9 +248,12 @@ public class QuestionsActivity extends Activity {
         optionsC = findViewById(R.id.OptionsC);
         optionsD = findViewById(R.id.OptionsD);
         progressBar = findViewById(R.id.progressBarQ);
+        progressBarL= findViewById(R.id.progressbarL);
+        loc=findViewById(R.id.loc);
         user = MyApplication.user;
         initializeMap();
         progressBar.setVisibility(View.GONE);
+        progressBarL.setVisibility(View.GONE);
         TextView link = findViewById(R.id.hyperlink);
         link.setMovementMethod(LinkMovementMethod.getInstance());
     }
@@ -291,7 +309,7 @@ public class QuestionsActivity extends Activity {
                             Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                             Uri uri = Uri.fromParts("package", getPackageName(), null);
                             intent.setData(uri);
-                            startActivityForResult(intent, 1000);     // Comment 3.
+                            startActivityForResult(intent, 1000);
                         }
                     });
 
@@ -349,6 +367,38 @@ public class QuestionsActivity extends Activity {
                 });
         AlertDialog alert = alertDialogBuilder.create();
         alert.show();
+    }
+
+
+    class AddressResultReceiver extends ResultReceiver {
+        public AddressResultReceiver(Handler handler) {
+            super(handler);
+        }
+
+        @Override
+        protected void onReceiveResult(int resultCode, Bundle resultData) {
+
+            if (resultData == null) {
+                return;
+            }
+
+            // Display the address string
+            // or an error message sent from the intent service.
+            String addressOutput = resultData.getString(FetchAddressIntentService.RESULT_DATA_KEY);
+            if (addressOutput == null) {
+                addressOutput = "";
+            }
+
+
+            // Show a toast message if an address was found.
+            if (resultCode == FetchAddressIntentService.SUCCESS_RESULT) {
+                loc.setText(addressOutput);
+                MyApplication.user.responseObject.place=addressOutput;
+                progressBarL.setVisibility(View.GONE);
+                Toast.makeText(QuestionsActivity.this,getString(R.string.address_found),Toast.LENGTH_SHORT).show();
+            }
+
+        }
     }
 
 }

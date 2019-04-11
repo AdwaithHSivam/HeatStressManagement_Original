@@ -11,9 +11,11 @@ import java.util.Map;
 public class ResponseClass {
     public Map<String, Object> Responses;
     public GeoPoint geoPoint;
+    public String place;
 
     public ResponseClass(){
         Responses= new HashMap<>();
+        place="";
     }
 
     public void AddResponse(String Q,String A){

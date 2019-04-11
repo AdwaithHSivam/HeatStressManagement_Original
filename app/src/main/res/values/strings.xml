@@ -9,4 +9,8 @@
     <string name="notification_title">Remainder</string>
     <string name="notification_text">Its Survey Time.</string>
     <string name="channel_description">Notification Channel of HSM App</string>
+    <string name="address_found">Address Found</string>
+    <string name="no_address_found">No Address found</string>
+    <string name="invalid_lat_long_used">Invalid Coords</string>
+    <string name="service_not_available">Service Unavailable</string>
 </resources>
