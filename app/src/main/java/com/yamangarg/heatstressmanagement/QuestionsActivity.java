@@ -8,22 +8,20 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
 import android.os.Handler;
 import android.os.ResultReceiver;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -40,7 +38,6 @@ import com.google.firebase.firestore.GeoPoint;
 
 import java.text.DateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,14 +46,17 @@ public class QuestionsActivity extends Activity {
     LocationManager locationManager;
     LocationListener locationListener;
 
+    boolean locAvailable=false;
+
     RadioGroup whichDay, optionsAa,optionsAb,optionsAc,optionsB,optionsC,optionsD;
-    ProgressBar progressBar,progressBarL;
+    ProgressBar progressBar;
+    ImageView thankU;
     User user;
     EditText loc;
 
 
     HashMap<String,BiMap> Qid = new HashMap<>();
-    HashMap<String,RadioGroup> Qradio = new HashMap<>();
+    HashMap<String,RadioGroup> QRadio = new HashMap<>();
 
     BiMap<Integer,String> options_Aa=new BiMap<>();
     BiMap<Integer,String> options_Ab=new BiMap<>();
@@ -83,9 +83,9 @@ public class QuestionsActivity extends Activity {
         options_Ac.put(R.id.radioButton4Ac,"Sweltering");
 
         options_B.put(R.id.radioButton1B,"NoActivity");
-        options_B.put(R.id.radioButton2B,"Light");
-        options_B.put(R.id.radioButton3B,"Moderate");
-        options_B.put(R.id.radioButton4B,"Heavy");
+        options_B.put(R.id.radioButton2B,"Light_1");
+        options_B.put(R.id.radioButton3B,"Moderate_1");
+        options_B.put(R.id.radioButton4B,"Heavy_1");
 
         options_C.put(R.id.radioButton1C,"DirectSun");
         options_C.put(R.id.radioButton2C,"Shading");
@@ -102,12 +102,12 @@ public class QuestionsActivity extends Activity {
         Qid.put("QuestionC",options_C);
         Qid.put("QuestionD",options_D);
 
-        Qradio.put("QuestionAa",optionsAa);
-        Qradio.put("QuestionAb",optionsAb);
-        Qradio.put("QuestionAc",optionsAc);
-        Qradio.put("QuestionB",optionsB);
-        Qradio.put("QuestionC",optionsC);
-        Qradio.put("QuestionD",optionsD);
+        QRadio.put("QuestionAa",optionsAa);
+        QRadio.put("QuestionAb",optionsAb);
+        QRadio.put("QuestionAc",optionsAc);
+        QRadio.put("QuestionB",optionsB);
+        QRadio.put("QuestionC",optionsC);
+        QRadio.put("QuestionD",optionsD);
 
 
     }
@@ -116,23 +116,30 @@ public class QuestionsActivity extends Activity {
 
     public void submit(View view) {
 
-        Calendar cal = Calendar.getInstance();
+        loc.clearFocus();
 
-
-        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
-            showGPSDisabledAlertToUser();
+        if(!locAvailable){
+            if(loc.getText().toString().equals("")){
+                if(!user.responseObject.place.equals("")) {
+                    loc.setText(user.responseObject.place);
+                }
+            }
+            else{
+                user.responseObject.place=loc.getText().toString();
+            }
+        }
+        if (user.responseObject.place.equals("")){
+            showLocationError();
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
+        Calendar cal = Calendar.getInstance();
 
         for (Map.Entry<String, BiMap> pair : Qid.entrySet()) {
-            user.AddResponse(pair.getKey(), (String) pair.getValue().map.get(Qradio.get(pair.getKey()).getCheckedRadioButtonId()));
+            user.AddResponse(pair.getKey(), (String) pair.getValue().map.get(QRadio.get(pair.getKey()).getCheckedRadioButtonId()));
 
         }
 
-
-
-        //Log.d("abcde", user.toString());
 
         if(whichDay.getCheckedRadioButtonId()==R.id.yesterday){
             cal.add(Calendar.DATE, -1);
@@ -144,7 +151,7 @@ public class QuestionsActivity extends Activity {
         FirebaseFirestore.getInstance().collection("responses_3").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(a);
 
         FirebaseFirestore.getInstance().collection("responses_3")
-                .document(FirebaseAuth.getInstance().getCurrentUser().getUid()).collection("responses_by_date").document( DateFormat.getDateInstance().format(cal.getTime()))
+                .document(FirebaseAuth.getInstance().getCurrentUser().getUid()).collection("responses_by_date").document( DateFormat.getDateInstance(DateFormat.MEDIUM).format(cal.getTime()))
                 .set(user.responseObject)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -152,14 +159,25 @@ public class QuestionsActivity extends Activity {
                         if(task.isSuccessful()){
                             FirebaseFirestore.getInstance().collection("responses_3")
                                     .document(FirebaseAuth.getInstance().getCurrentUser().getUid()).collection("last_response").document( "last")
-                                    .set(user.responseObject.Responses)
+                                    .set(user.responseObject)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if(task.isSuccessful()){
                                                 Toast.makeText(getApplicationContext(),"Response Submission Successful",Toast.LENGTH_SHORT).show();
 
-                                                onBackPressed();
+                                                thankU.setVisibility(View.VISIBLE);
+
+                                                final Handler handler = new Handler();
+                                                handler.postDelayed(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        // Do something after 5s = 5000ms
+                                                        onBackPressed();
+                                                    }
+                                                }, 1000);
+
+
 
                                             }
                                             else {
@@ -184,6 +202,7 @@ public class QuestionsActivity extends Activity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -195,13 +214,10 @@ public class QuestionsActivity extends Activity {
             @Override
             public void onLocationChanged(android.location.Location location) {
 
-                //Log.i("Location", location.toString());
                 if (location!=null) {
-                    progressBarL.setVisibility(View.VISIBLE);
-
                     AddressResultReceiver resultReceiver=new AddressResultReceiver(new Handler());
 
-                    MyApplication.user.responseObject.geoPoint = new GeoPoint(location.getLatitude(), location.getLongitude());
+                    user.responseObject.geoPoint = new GeoPoint(location.getLatitude(), location.getLongitude());
 
                     Intent intent = new Intent(QuestionsActivity.this, FetchAddressIntentService.class);
                     intent.putExtra(FetchAddressIntentService.RECEIVER, resultReceiver);
@@ -248,12 +264,15 @@ public class QuestionsActivity extends Activity {
         optionsC = findViewById(R.id.OptionsC);
         optionsD = findViewById(R.id.OptionsD);
         progressBar = findViewById(R.id.progressBarQ);
-        progressBarL= findViewById(R.id.progressbarL);
+        thankU =findViewById(R.id.thankU);
         loc=findViewById(R.id.loc);
-        user = MyApplication.user;
+        user=MyApplication.user;
+        locAvailable=false;
+
+
         initializeMap();
         progressBar.setVisibility(View.GONE);
-        progressBarL.setVisibility(View.GONE);
+        thankU.setVisibility(View.GONE);
         TextView link = findViewById(R.id.hyperlink);
         link.setMovementMethod(LinkMovementMethod.getInstance());
     }
@@ -269,15 +288,25 @@ public class QuestionsActivity extends Activity {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        //Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                        MyApplication.user.responseObject.Responses= document.getData();
-                        for (Map.Entry<String, Object> pair : MyApplication.user.responseObject.Responses.entrySet()) {
-                            Object a = Qid.get(pair.getKey()).inversedMap.get(pair.getValue());
-                            if(a!=null) {
-                                Qradio.get(pair.getKey()).check(( int)a);
+                        if(document.getData().containsKey("Responses")) {
+                            user.responseObject.Responses = (Map<String, Object>) document.getData().get("Responses");
+                            for (Map.Entry<String, Object> pair : user.responseObject.Responses.entrySet()) {
+                                Object a = Qid.get(pair.getKey()).inversedMap.get(pair.getValue());
+                                if (a != null) {
+                                    QRadio.get(pair.getKey()).check((int) a);
+                                }
                             }
                         }
+                        if(document.getData().containsKey("place")){
+                            user.responseObject.place = (String) document.getData().get("place");
+                        }
+                        if(document.getData().containsKey("geoPoint")){
+                            user.responseObject.geoPoint = (GeoPoint) document.getData().get("geoPoint");
+                        }
+                        if(!user.responseObject.place.equals("")) {
 
+                            loc.setText(user.responseObject.place);
+                        }
                     }
 
                 }
@@ -299,53 +328,21 @@ public class QuestionsActivity extends Activity {
 
         } else if (Build.VERSION.SDK_INT >= 23 && !shouldShowRequestPermissionRationale(permissions[0])) {
             // User selected the Never Ask Again Option Change settings in app settings manually
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            alertDialogBuilder.setTitle("Error");
-            alertDialogBuilder
-                    .setMessage("This app requires access to location")
-                    .setCancelable(false)
-                    .setPositiveButton("Go to Settings", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                            Uri uri = Uri.fromParts("package", getPackageName(), null);
-                            intent.setData(uri);
-                            startActivityForResult(intent, 1000);
-                        }
-                    });
 
-            AlertDialog alertDialog = alertDialogBuilder.create();
-            alertDialog.show();
 
         } else {
             // User selected Deny Dialog to EXIT App ==> OR <== RETRY to have a second chance to Allow Permissions
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED) {
 
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-                alertDialogBuilder.setTitle("Error");
-                alertDialogBuilder
-                        .setMessage("This app requires access to location." )
-                        .setCancelable(false)
-                        .setPositiveButton("Retry", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                //ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, Integer.parseInt(WRITE_EXTERNAL_STORAGE));
-                                Intent i = new Intent(QuestionsActivity.this, Location.class);
-                                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(i);
-                            }
-                        })
-                        .setNegativeButton("Exit", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                onBackPressed();
-                                dialog.cancel();
-                            }
-                        });
-                AlertDialog alertDialog = alertDialogBuilder.create();
-                alertDialog.show();
-            }
         }
+
 
     }
 
+
+    private void showLocationError() {
+
+        loc.setError("Location is needed");
+    }
 
     private void showGPSDisabledAlertToUser(){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -382,20 +379,18 @@ public class QuestionsActivity extends Activity {
                 return;
             }
 
-            // Display the address string
-            // or an error message sent from the intent service.
             String addressOutput = resultData.getString(FetchAddressIntentService.RESULT_DATA_KEY);
             if (addressOutput == null) {
                 addressOutput = "";
             }
 
 
-            // Show a toast message if an address was found.
             if (resultCode == FetchAddressIntentService.SUCCESS_RESULT) {
-                loc.setText(addressOutput);
-                MyApplication.user.responseObject.place=addressOutput;
-                progressBarL.setVisibility(View.GONE);
-                Toast.makeText(QuestionsActivity.this,getString(R.string.address_found),Toast.LENGTH_SHORT).show();
+                locAvailable=true;
+                user.responseObject.place=addressOutput;
+                loc.setText(user.responseObject.place);
+                loc.setEnabled(false);
+                loc.setFocusable(false);
             }
 
         }

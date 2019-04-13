@@ -71,8 +71,9 @@ public class Registration extends AppCompatActivity {
 
     public void register(View view) {
 
-        progressBar.setVisibility(View.VISIBLE);
+
                 if(checkDataEntered()) {
+                    progressBar.setVisibility(View.VISIBLE);
                     MyApplication.user.userData.Uid=mAuth.getCurrentUser().getUid();
                     MyApplication.user
                             .setValues(firstName.getText().toString(),lastName.getText().toString(),getGender(),getAgeR(),email.getText().toString());
@@ -160,11 +161,6 @@ public class Registration extends AppCompatActivity {
 
         if(age.getCheckedRadioButtonId() == -1) {
             ageTextView.setError("Select age!");
-            flag=false;
-        }
-
-        if(!android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()){
-            email.setError("Invalid Email Id");
             flag=false;
         }
 

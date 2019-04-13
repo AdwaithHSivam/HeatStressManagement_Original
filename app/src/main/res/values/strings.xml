@@ -13,4 +13,5 @@
     <string name="no_address_found">No Address found</string>
     <string name="invalid_lat_long_used">Invalid Coords</string>
     <string name="service_not_available">Service Unavailable</string>
+    <string name="refresh">Refresh</string>
 </resources>

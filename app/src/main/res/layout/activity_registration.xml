@@ -9,6 +9,7 @@
 
     <TextView
         android:id="@+id/textView"
+        style="@style/WhiteText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="41dp"
@@ -22,6 +23,7 @@
 
     <EditText
         android:id="@+id/firstName"
+        style="@style/WhiteText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="41dp"
@@ -37,6 +39,7 @@
 
     <EditText
         android:id="@+id/lastName"
+        style="@style/WhiteText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="41dp"
@@ -52,6 +55,7 @@
 
     <TextView
         android:id="@+id/genderTextView"
+        style="@style/WhiteText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="41dp"
@@ -101,6 +105,7 @@
 
     <TextView
         android:id="@+id/ageTextView"
+        style="@style/WhiteText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="41dp"
@@ -172,6 +177,7 @@
 
     <EditText
         android:id="@+id/email"
+        style="@style/WhiteText"
         android:layout_width="326dp"
         android:layout_height="46dp"
         android:layout_marginTop="8dp"
@@ -207,7 +213,7 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
